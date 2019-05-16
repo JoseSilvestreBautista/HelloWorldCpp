@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int main() {
+int main() { // menu for to keep track of inventory 
     cout << "Hello User!\n" << endl;
     cout << "Production Line Tracker\n" << endl;
     cout << "1. Add Employee Account" << endl;
