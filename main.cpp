@@ -9,24 +9,17 @@
 #include <cstdio>
 #include <fstream>
 #include <string>
- // these are prototypes
+
+// these are prototypes
 void menu(); // display main menu
 
 void processing(int); // prevents user from invalid choice in main menu
 
 int produceItems(); // next menu from choosing 1. from main menu also serial number for products
 
-void saveToFile(); // creates a file
-
-void writeToFile(); // writes and reads file
-
-void writeAppend();
-
 void itemTypeMenu(); // item display menu. it was created to display several times if user has invalid selection
 
 int main() {  // drives the entire program by calling other functions.
-    saveToFile();
-    writeToFile();
 
     std::cout << "Hello User!\n" << std::endl; // user greeting
     menu(); // call to the main menu to display
@@ -35,32 +28,10 @@ int main() {  // drives the entire program by calling other functions.
         std::cin >> userMenuSelection;
         processing(userMenuSelection);
     } while (userMenuSelection > 6 || userMenuSelection < 1);
-    writeAppend();
+
     return 0;
 }
 
-void saveToFile() { //opens a file, then writes in file, then closes.
-    std::ofstream myfile;
-    myfile.open("Production.txt");
-    myfile << "produceItems\n";
-    myfile.close();
-}
-
-void writeToFile() {
-    std::ofstream myfile;
-    if (myfile.is_open()) {
-        myfile << "This is a line.\n";
-        myfile << "This is another line.\n";
-        myfile.close();
-    } else std::cout << "Unable to open file";
-}
-
-void writeAppend() {
-    std::ofstream myFile;
-    myFile.open("Production.txt", std::ios_base::app);
-    myFile << "writeAppend called. Writing this to example.txt" << "\n";
-    myFile.close();
-}
 
 void menu() { // main menu display
     std::cout << "Production Line Tracker\n" << std::endl;
@@ -131,12 +102,23 @@ int produceItems() { // submenu from selecting 1. Produce Items from main menu
     // add a loop to record production, for now simply by
     // outputting production number and serial number
     // produces the serial number products
-    for (int productNumber = 1; productNumber <= numProduced; ++productNumber) {
+    int productNumber;
+    std::ofstream myfile("Production.txt", std::ios::app);
+    myfile.is_open();
+
+    for (productNumber = 0; productNumber < numProduced;) {
+        ++productNumber;
         std::cout << "Production Number: " << productNumber << " Serial Number: " << manufacturer.substr(0, 3)
-                  << itemTypeCode
-                  << std::flush;
-        printf("%05d\n", productNumber);
+                  << itemTypeCode << std::setfill('0') << std::setw(5) << productNumber
+                  << std::endl;
+
+        myfile << "Production Number: " << productNumber << " Serial Number: " << manufacturer.substr(0, 3)
+               << itemTypeCode << std::setfill('0') << std::setw(5) << productNumber
+               << std::endl;
+
     }
+    myfile.close();
+
     return 0;
 }
 
