@@ -10,6 +10,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include "prototypes.h"
 
@@ -22,9 +23,10 @@ int main() {  // drives the entire program by calling other functions.
     std::vector<std::string> productLineManufacturer = {"Apple", "Microsoft", "Apple"};
     std::vector<std::string> productLineName = {"iPod", "Surface Laptop 2", "iPad"};
     std::vector<std::string> productLineItemType = {"AM", "VM", "VM"};
+    std::vector<int> productNumber = {0};
     do {
         userMenuSelection = menuSelection();
-        processing(userMenuSelection, productLineManufacturer, productLineName, productLineItemType);
+        processing(userMenuSelection, productLineManufacturer, productLineName, productLineItemType, productNumber);
     } while (userMenuSelection > 6 || userMenuSelection < 1);
     return 0;
 
@@ -51,11 +53,12 @@ void stub() { // dummy function used as a temporary call for future function not
 
 void processing(int userMenuSelection, std::vector<std::string> &productLineManufacturer,
                 std::vector<std::string> &productLineName,
-                std::vector<std::string> &productLineItemType) { // main menu decision function. passes user to next submenu and
+                std::vector<std::string> &productLineItemType,
+                std::vector<int> &productNumber) { // main menu decision function. passes user to next submenu and
 
     switch (userMenuSelection) {
         case 1 :
-            produceItems(productLineManufacturer, productLineName, productLineItemType);
+            produceItems(productLineManufacturer, productLineName, productLineItemType, productNumber);
             break;
         case 2 :
             stub();
@@ -79,26 +82,30 @@ void processing(int userMenuSelection, std::vector<std::string> &productLineManu
 
 int produceItems(std::vector<std::string> &productLineManufacturer,
                  std::vector<std::string> &productLineName,
-                 std::vector<std::string> &productLineItemType) { // submenu from selecting 1. Produce Items from main menu
+                 std::vector<std::string> &productLineItemType,
+                 std::vector<int> &productNumber) { // submenu from selecting 1. Produce Items from main menu
     // Eventually the user will be able to choose the item to produce.
     // For now, just have them input the information.
-    availableProductsDisplay(productLineName);
+    output_sorted_product_names(productLineName);
     int productChoice;
     std::cin >> productChoice;
     std::cout << "How many products will be produced?" << std::endl;
     int productAmount;
     std::cin >> productAmount;
-    int productNumber;
+    int index;
 
 
     std::ofstream myfile("Production.txt", std::ios::app); // This create the file Production.txt and appends data.
     myfile.is_open();// opens the file
 
-    for (productNumber = 0; productNumber < productAmount;) {
-        ++productNumber;
-        std::cout << productNumber << ". " << productLineManufacturer[productChoice].substr(0, 3)
-                  << productLineItemType[productChoice] << std::setfill('0') << std::setw(5) << productNumber
+    for (index = 0; index < productAmount;) {
+        ++index;
+        std::cout << index << ". " << productLineManufacturer[productChoice].substr(0, 3)
+                  << productLineItemType[productChoice] << std::setfill('0') << std::setw(5) << index
                   << std::endl;
+        myfile << index << ". " << productLineManufacturer[productChoice].substr(0, 3)
+               << productLineItemType[productChoice] << std::setfill('0') << std::setw(5) << index
+               << std::endl;
 
     }
     myfile.close();// closes the Production.txt file
@@ -106,13 +113,6 @@ int produceItems(std::vector<std::string> &productLineManufacturer,
     return 0;
 }
 
-void itemTypeMenu() { //  itemTypeMenu from produce items
-    std::cout << "Enter the item type\n";
-    std::cout << "1. Audio\n" <<
-              "2. Visual\n" <<
-              "3. AudioMobile\n" <<
-              "4. VisualMobile\n";
-}
 
 void addToProductLine(std::vector<std::string> &productLineManufacturer,
                       std::vector<std::string> &productLineName,
@@ -178,11 +178,17 @@ void processingNewProductInfo(std::vector<std::string> &productLineManufacturer,
 
 }
 
-void availableProductsDisplay(std::vector<std::string> &productLineName) {
+void output_sorted_product_names(std::vector<std::string> &productLineName) {
     std::cout << "Enter the product to Produce product :\n";
     for (int productLineItemNum = 0; productLineItemNum < productLineName.size(); productLineItemNum++) {
         std::cout << productLineItemNum << ". " << std::flush;
         std::cout << productLineName[productLineItemNum] << std::endl;
+    }
+
+    sort(productLineName.begin(), productLineName.end());
+
+    for (const auto &x : productLineName) {
+        std::cout << x << std::endl;
     }
 }
 
