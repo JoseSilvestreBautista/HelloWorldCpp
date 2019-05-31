@@ -17,7 +17,8 @@ void menu();
  */
 void processing(int, std::vector<std::string> &productLineManufacturer,
                 std::vector<std::string> &productLineName,
-                std::vector<std::string> &productLineItemType);
+                std::vector<std::string> &productLineItemType,
+                std::vector<int> &productNumber);
 
 /**
  * @brief  Function that records products made using serial numbers.
@@ -25,12 +26,8 @@ void processing(int, std::vector<std::string> &productLineManufacturer,
  */
 int produceItems(std::vector<std::string> &productLineManufacturer,
                  std::vector<std::string> &productLineName,
-                 std::vector<std::string> &productLineItemType);
-
-/**
- * @brief Item type menu from produceItems function.
- */
-void itemTypeMenu(); // item display menu. it was created to display several times if user has invalid selection
+                 std::vector<std::string> &productLineItemType,
+                 std::vector<int> &productNumber);
 
 int menuSelection();
 
@@ -46,8 +43,6 @@ void newAvailableDetailedProducts(std::vector<std::string> &productLineManufactu
                                   std::vector<std::string> &productLineName,
                                   std::vector<std::string> &productLineItemType);
 
-
-void availableProductsDisplay(std::vector<std::string> &productLineName);
+void output_sorted_product_names(std::vector<std::string> &productLineName);
 
 #endif //HELLOWORLD_PROTOTYPES_H
-
