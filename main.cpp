@@ -4,13 +4,6 @@
  *  @bug no known bugs
  */
 
-#include <iostream>
-#include <iomanip>
-#include <cstdio>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <algorithm>
 
 #include "prototypes.h"
 
@@ -18,16 +11,12 @@ int main() {  // drives the entire program by calling other functions.
 
     std::cout << "Hello User!\n" << std::endl; // user greeting
     std::cout << "Production Line Tracker\n" << std::endl;
-    menu(); // call to the main menu to display
-    int userMenuSelection;
     std::vector<std::string> productLineManufacturer = {"Apple", "Microsoft", "Apple"};
     std::vector<std::string> productLineName = {"iPod", "Surface Laptop 2", "iPad"};
     std::vector<std::string> productLineItemType = {"AM", "VM", "VM"};
     std::vector<int> productNumber = {0};
-    do {
-        userMenuSelection = menuSelection();
-        processing(userMenuSelection, productLineManufacturer, productLineName, productLineItemType, productNumber);
-    } while (userMenuSelection > 6 || userMenuSelection < 1);
+    processing(productLineManufacturer, productLineName, productLineItemType, productNumber);
+
     return 0;
 
 }
@@ -41,11 +30,6 @@ void menu() { // main menu display
     std::cout << "5. Exit" << std::endl;
 }
 
-int menuSelection() {
-    int input;
-    std::cin >> input;
-    return input;
-}
 
 void stub() { // dummy function used as a temporary call for future function not yet built.
     std::cout << "I am the stub" << std::endl;
@@ -58,9 +42,9 @@ void processing(std::vector<std::string> &productLineManufacturer,
     bool repeat = true;
     while (repeat) {
         menu();
+        std::cout << std::endl;
         int ask;
         std::cin >> ask;
-
         switch (ask) {
             case 1 :
                 produceItems(productLineManufacturer, productLineName, productLineItemType, productNumber);
@@ -80,7 +64,8 @@ void processing(std::vector<std::string> &productLineManufacturer,
                 break;
             default:
                 std::cout << "Not A Valid Selection\n" << std::endl;
-                menu();
+                std::cin.clear();
+                std::cin.ignore();
                 break;
         }
 
@@ -117,6 +102,7 @@ int produceItems(std::vector<std::string> &productLineManufacturer,
     }
     myfile.close();// closes the Production.txt file
 
+    std::cout << std::endl;
     return 0;
 }
 
@@ -209,5 +195,5 @@ void newAvailableDetailedProducts(std::vector<std::string> &productLineManufactu
         std::cout << productLineName[productLineItemNum] << ", ";
         std::cout << productLineItemType[productLineItemNum] << "\n";
     }
-
+std::cout << std::endl;
 }
