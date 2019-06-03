@@ -51,33 +51,40 @@ void stub() { // dummy function used as a temporary call for future function not
     std::cout << "I am the stub" << std::endl;
 }
 
-void processing(int userMenuSelection, std::vector<std::string> &productLineManufacturer,
+void processing(std::vector<std::string> &productLineManufacturer,
                 std::vector<std::string> &productLineName,
                 std::vector<std::string> &productLineItemType,
                 std::vector<int> &productNumber) { // main menu decision function. passes user to next submenu and
+    bool repeat = true;
+    while (repeat) {
+        menu();
+        int ask;
+        std::cin >> ask;
 
-    switch (userMenuSelection) {
-        case 1 :
-            produceItems(productLineManufacturer, productLineName, productLineItemType, productNumber);
-            break;
-        case 2 :
-            stub();
-            break;
-        case 3 :
-            addToProductLine(productLineManufacturer, productLineName, productLineItemType);
-            break;
-        case 4 :
-            stub();
-            break;
-        case 5 :
-            std::cout << "exit" << std::endl;
-            break;
-        default:
-            std::cout << "Not A Valid Selection\n" << std::endl;
-            menu();
-            break;
+        switch (ask) {
+            case 1 :
+                produceItems(productLineManufacturer, productLineName, productLineItemType, productNumber);
+                break;
+            case 2 :
+                stub();
+                break;
+            case 3 :
+                addToProductLine(productLineManufacturer, productLineName, productLineItemType);
+                break;
+            case 4 :
+                stub();
+                break;
+            case 5 :
+                std::cout << "exit" << std::endl;
+                repeat = false;
+                break;
+            default:
+                std::cout << "Not A Valid Selection\n" << std::endl;
+                menu();
+                break;
+        }
+
     }
-
 }
 
 int produceItems(std::vector<std::string> &productLineManufacturer,
