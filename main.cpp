@@ -290,7 +290,6 @@ void productInfoLoad(std::vector<std::string> &productLineManufacturer, std::vec
         productLineManufacturer.push_back(manu);
         productLineName.push_back(prodnam);
         productLineItemType.push_back(type);
-
     }
 
 
@@ -304,13 +303,12 @@ void productSerialInfoLoad(std::vector<std::string> &serialsSeries, std::vector<
 
     while (getline(myfile, line)) {
         std::stringstream ss(line);
-        getline(ss, ssNum, ',');
-        getline(ss, serial, ',');
+        ss >> ssNum;
+        ss >> serial;
         proNum = std::stoi(ssNum);
         productNumber.push_back(proNum);
         serialsSeries.push_back(serial);
     }
-
 
 }
 
