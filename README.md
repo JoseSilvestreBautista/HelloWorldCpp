@@ -1,2 +1,3 @@
 # HelloWorldCpp
-https://repl.it/@JoseSilvestreBa/ProceduralProject
+
+#For information on the program's functions read the prototypes header file.
