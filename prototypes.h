@@ -27,7 +27,7 @@ void menu();
 
 /**
  * @brief Process the user's main menu selection and prevents improper selection.
- * @param Takes the user's number input for main menu selection: userMenuSelection.
+ * @param
  */
 void processing(std::vector<std::string> &productLineManufacturer, std::vector<std::string> &productLineName,
                 std::vector<std::string> &productLineItemType, std::vector<int> &productNumber, std::vector<int> &Audio,
@@ -43,39 +43,83 @@ int produceItems(std::vector<std::string> &productLineManufacturer,
                  std::vector<int> &Visual, std::vector<int> &AudioMobile, std::vector<int> &VisualMobile);
 
 
-
+/**
+ * @brief where new products are created and displayed
+ * @param productLineManufacturer
+ * @param productLineName
+ * @param productLineItemType
+ */
 
 void addToProductLine(std::vector<std::string> &productLineManufacturer,
                       std::vector<std::string> &productLineName,
                       std::vector<std::string> &productLineItemType);
 
+/**
+ * @brief the user creates an employee user name with first name and last name.
+ */
 void AddEmployeeAccount();
 
+/**
+ * @brief the user creates a password with certain requirements.
+ */
 void CreateEmployeePassword();
+
+/**
+ * @brief user adds new products by entering manufacturer, product name, and item type.
+ * @param productLineManufacturer
+ * @param productLineName
+ * @param productLineItemType
+ */
 
 void processingNewProductInfo(std::vector<std::string> &productLineManufacturer,
                               std::vector<std::string> &productLineName,
                               std::vector<std::string> &productLineItemType);
 
+/**
+ * @brief displays newly add products to the user
+ * @param productLineManufacturer
+ * @param productLineName
+ * @param productLineItemType
+ */
 void newAvailableDetailedProducts(std::vector<std::string> &productLineManufacturer,
                                   std::vector<std::string> &productLineName,
                                   std::vector<std::string> &productLineItemType);
 
+/**
+ * @brief saves the newly added products to a file for safe keeping
+ * @param productLineManufacturer
+ * @param productLineName
+ * @param productLineItemType
+ */
 void newAvailableDetailedProductsToFile(std::vector<std::string> &productLineManufacturer,
                                         std::vector<std::string> &productLineName,
                                         std::vector<std::string> &productLineItemType);
+/**
+ * @brief retrieves the products saved to a file and newly created products and displays them
+ * @param productLineManufacturer
+ * @param productLineName
+ * @param productLineItemType
+ */
 
 void ReadAvailableDetailedProductsInFile(std::vector<std::string> &productLineManufacturer,
                                          std::vector<std::string> &productLineName,
                                          std::vector<std::string> &productLineItemType);
 
+/**
+ * @brief retrieves saved product info to the program
+ * @param productLineManufacturer
+ * @param productLineName
+ * @param productLineItemType
+ */
 void productInfoLoad(std::vector<std::string> &productLineManufacturer, std::vector<std::string> &productLineName,
                      std::vector<std::string> &productLineItemType);
-
+/**
+ * @brief loads saved product numbers and serial numbers into the program
+ * @param serialsSeries
+ * @param productNumber
+ */
 void productSerialInfoLoad(std::vector<std::string> &serialsSeries, std::vector<int> &productNumber);
 
-//void output_sorted_product_names(std::vector<std::string> &productLineName);
 
 
 #endif //HELLOWORLD_PROTOTYPES_H
-
