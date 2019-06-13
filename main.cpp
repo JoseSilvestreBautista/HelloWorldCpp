@@ -53,6 +53,7 @@ void processing(ProductInfo &myProduct, std::vector<int> &productNumber,
                 addToProductLine(myProduct);
                 break;
             case 4 :
+                DisplayProductionStatistics(productNumber, productSerial);
                 break;
             case 5 :
                 std::cout << "exit" << std::endl;
@@ -131,7 +132,8 @@ int produceItems(const ProductInfo &myProduct,
            << std::setw(5)
            << holder + i << std::endl;
 
-        std::ofstream myfile("Production.txt", std::ios::app); // This create the file Production.txt and appends data.
+        std::ofstream myfile("ProductionLog.csv ",
+                             std::ios::app); // This create the file Production.txt and appends data.
         myfile.is_open();// opens the file
 
         myfile << productNumber.back() + i << ". " << threeLetterManufacturer.substr(0, 3) << itemType
@@ -241,7 +243,7 @@ void newAvailableDetailedProducts(const ProductInfo &myProduct) {
 
 void newAvailableDetailedProductsToFile(const ProductInfo &myProduct) {
     for (int productLineItemNum = 0; productLineItemNum < myProduct.productLineItemType.size(); productLineItemNum++) {
-        std::ofstream catalogfile("productcatalog.txt", std::ios::app);
+        std::ofstream catalogfile("ProductLine.csv", std::ios::app);
         if (catalogfile.is_open()) {
 
             catalogfile << myProduct.productLineManufacturer[productLineItemNum] << ",";
@@ -260,7 +262,7 @@ void ReadAvailableDetailedProductsInFile() {
     std::cout << "The products in the Product Line are:\n";
     std::string line;
     int counter = 0;
-    std::ifstream catalogfile("productcatalog.txt");
+    std::ifstream catalogfile("ProductLine.csv");
     if (catalogfile.is_open()) {
         while (getline(catalogfile, line)) {
             std::cout << counter++ << ". " << line << '\n';
@@ -275,7 +277,7 @@ void ReadAvailableDetailedProductsInFile() {
 
 void productInfoLoad(ProductInfo &myProduct) {
     std::string manu, prodnam, type, line;
-    std::ifstream catalogfile("productcatalog.txt");
+    std::ifstream catalogfile("ProductLine.csv");
 
     while (getline(catalogfile, line)) {
         std::stringstream ss(line);
@@ -294,7 +296,7 @@ void productSerialInfoLoad(std::vector<std::string> &serialsSeries, std::vector<
                            ItemTypeSerial &productSerial) {
     std::string serial, line, firstNum, itemType, secondNum;
     int proNum, lastNums;
-    std::ifstream myfile("Production.txt");
+    std::ifstream myfile("ProductionLog.csv ");
 
     while (getline(myfile, line)) {
         std::stringstream ss(line);
@@ -407,3 +409,34 @@ std::string encrypt_string(std::string str) {
     }
 }
 
+void DisplayProductionStatistics(std::vector<int> &productNumber, ItemTypeSerial &productSerial) {
+
+    if (productSerial.AudioMobile.empty()) {
+        productSerial.AudioMobile.push_back(0);
+    } else {
+        std::cout << "There is an error" << std::endl;
+    }
+    if (productSerial.VisualMobile.empty()) {
+        productSerial.VisualMobile.push_back(0);
+    } else {
+        std::cout << "There is an error" << std::endl;
+    }
+    if (productSerial.Visual.empty()) {
+        productSerial.Visual.push_back(0);
+    } else {
+        std::cout << "There is an error" << std::endl;
+    }
+    if (productSerial.Audio.empty()) {
+        productSerial.Audio.push_back(0);
+    } else {
+        std::cout << "There is an error" << std::endl;
+    }
+
+    std::cout << "Total Product Created: " << productNumber.back() << std::endl;
+    std::cout << "Total Audio Products: " << productSerial.Audio.back() << std::endl;
+    std::cout << "Total AudioMobile Products: " << productSerial.AudioMobile.back() << std::endl;
+    std::cout << "Total Visual Products: " << productSerial.Visual.back() << std::endl;
+    std::cout << "Total VisualMobile Products: " << productSerial.VisualMobile.back() << std::endl;
+
+    std::cout << std::endl;
+}
