@@ -7,11 +7,11 @@
 #include "prototypes.h"
 
 
-//int prodNum = 1;
-//int audioSerialNum = 0;
-//int audioMobileSerialNum = 0;
-//int visualSerialNum = 0;
-//int visualMobileSerialNum = 0;
+std::vector<int> Audio;
+std::vector<int> Visual;
+std::vector<int> AudioMobile;
+std::vector<int> VisualMobile;
+
 
 int main() {  // drives the entire program by calling other functions.
     std::vector<std::string> productLineManufacturer;
@@ -19,10 +19,7 @@ int main() {  // drives the entire program by calling other functions.
     std::vector<std::string> productLineItemType;
     std::vector<std::string> serialsSeries;
     std::vector<int> productNumber;
-    std::vector<int> Audio;
-    std::vector<int> Visual;
-    std::vector<int> AudioMobile;
-    std::vector<int> VisualMobile;
+
     productInfoLoad(productLineManufacturer, productLineItemType, productLineName);
     productSerialInfoLoad(serialsSeries, productNumber);
     processing(productLineManufacturer, productLineName, productLineItemType, productNumber, Audio, Visual, AudioMobile,
@@ -99,46 +96,82 @@ int produceItems(std::vector<std::string> &productLineManufacturer,
     std::string itemType;
     productLineItemType[choice];
     itemType = productLineItemType[choice];
-//    if (itemType == "MM") {
-//        Audio[audioSerialNum] += 1;
-//    } else if (itemType == "VI") {
-//        Visual[visualSerialNum] += 1;
-//    } else if (itemType == "AM") {
-//        AudioMobile[audioMobileSerialNum] += 1;
-//    } else {
-//        VisualMobile[visualMobileSerialNum] += 1;
-//    }
 
+    int holder;
+
+    if (itemType.compare("AM")) {
+        if (AudioMobile.empty()) {
+            AudioMobile.push_back(0);
+        }
+        holder = AudioMobile.back();
+    } else if (itemType.compare("VM")) {
+        if (VisualMobile.empty()) {
+            VisualMobile.push_back(0);
+        }
+        holder = VisualMobile.back();
+    } else if (itemType.compare("VI")) {
+        if (Visual.empty()) {
+            Visual.push_back(0);
+        }
+        holder = Visual.back();
+    } else if (itemType.compare("MM")) {
+        if (Audio.empty()) {
+            Audio.push_back(0);
+        }
+        holder = Audio.back();
+    } else {
+        std::cout << "Something went wrong." << std::endl;
+    }
 
     std::cout << "Enter the number of items that were produced\n";
+
+
     int amountProduced;
     std::cin >> amountProduced;
-    int dum = 1;
-    productNumber.resize(amountProduced);
-    std::stringstream ss;
-    for (int i = 0; i < amountProduced; ++i) {
-        productNumber[i] = dum + i;
 
-        ss << productNumber[i] << ". " << threeLetterManufacturer.substr(0, 3) << itemType << std::setfill('0')
+    if (productNumber.empty()) {
+        productNumber.push_back(0);
+    }
+
+
+    std::stringstream ss;
+
+    int i;
+    for (i = 1; i < amountProduced + 1; i++) {
+
+        ss << productNumber.back() + i << ". " << threeLetterManufacturer.substr(0, 3) << itemType << std::setfill('0')
            << std::setw(5)
-           << i << std::endl;
+           << holder + i << std::endl;
 
         std::ofstream myfile("Production.txt", std::ios::app); // This create the file Production.txt and appends data.
         myfile.is_open();// opens the file
 
-        myfile << productNumber[i] << ". " << threeLetterManufacturer.substr(0, 3) << itemType << std::setfill('0')
+        myfile << productNumber.back() + i << ". " << threeLetterManufacturer.substr(0, 3) << itemType
+               << std::setfill('0')
                << std::setw(5)
-               << i << std::endl;
+               << holder + i << std::endl;
 
         myfile.close();// closes the Production.txt fil
 
     }
+    int temp = productNumber.back() + i - 1;
+    productNumber.push_back(temp);
 
+
+    if (itemType.compare("AM")) {
+        AudioMobile.back() += i - 1;
+    } else if (itemType.compare("VM")) {
+        VisualMobile.back() += i - 1;
+    } else if (itemType.compare("VI")) {
+        Visual.back() += i - 1;
+    } else if (itemType.compare("MM")) {
+        Audio.back() += i - 1;
+    } else {
+        std::cout << "Something went wrong." << std::endl;
+    }
     std::cout << ss.str() << std::endl;
 
-
     return 0;
-
 
 }
 
@@ -161,14 +194,13 @@ void addToProductLine(std::vector<std::string> &productLineManufacturer, std::ve
 void processingNewProductInfo(std::vector<std::string> &productLineManufacturer,
                               std::vector<std::string> &productLineName,
                               std::vector<std::string> &productLineItemType) {
-    std::cout << "Adding a new product to the product line\n";
 
+    std::cout << "Adding a new product to the product line\n";
     std::cout << "Enter the Manufacturer\n";
     std::string manufacturer;
     std::cin >> manufacturer;
     // add manufacturer to the vector here
     productLineManufacturer.push_back(manufacturer);
-
     std::cout << "Enter the Product Name\n";
     std::string prodName;
     std::cin >> prodName;
@@ -207,21 +239,6 @@ void processingNewProductInfo(std::vector<std::string> &productLineManufacturer,
 
 }
 
-
-
-//void output_sorted_product_names(std::vector<std::string> &productLineName) {
-//    std::cout << "Enter the product to Produce product :\n";
-//    for (int productLineItemNum = 0; productLineItemNum < productLineName.size(); productLineItemNum++) {
-//        std::cout << productLineItemNum << ". " << std::flush;
-//        std::cout << productLineName[productLineItemNum] << std::endl;
-//    }
-//
-//    sort(productLineName.begin(), productLineName.end());
-//
-//    for (const auto &x : productLineName) {
-//        std::cout << x << std::endl;
-//    }
-//}
 
 void newAvailableDetailedProducts(std::vector<std::string> &productLineManufacturer,
                                   std::vector<std::string> &productLineName,
@@ -293,21 +310,36 @@ void productInfoLoad(std::vector<std::string> &productLineManufacturer, std::vec
     }
 
 
-
 }
 
 void productSerialInfoLoad(std::vector<std::string> &serialsSeries, std::vector<int> &productNumber) {
-    std::string serial, line, ssNum;
-    int proNum;
+    std::string serial, line, firstNum, itemType, secondNum;
+    int proNum, lastNums;
     std::ifstream myfile("Production.txt");
 
     while (getline(myfile, line)) {
         std::stringstream ss(line);
-        ss >> ssNum;
+        ss >> firstNum;
         ss >> serial;
-        proNum = std::stoi(ssNum);
+        proNum = std::stoi(firstNum);
+        itemType = serial.substr(3, 2);
+        secondNum = serial.substr(5, 6);
+        lastNums = std::stoi(secondNum);
+
         productNumber.push_back(proNum);
-        serialsSeries.push_back(serial);
+
+        if (itemType.compare("AM")) {
+            AudioMobile.push_back(lastNums);
+        } else if (itemType.compare("VM")) {
+            VisualMobile.push_back(lastNums);
+        } else if (itemType.compare("VI")) {
+            Visual.push_back(lastNums);
+        } else if (itemType.compare("MM")) {
+            Audio.push_back(lastNums);
+        } else {
+            std::cout << "Something went wrong." << std::endl;
+        }
+
     }
 
 }
@@ -321,48 +353,77 @@ void AddEmployeeAccount() {
     std::string last_name;
     std::cin >> last_name;
     std::transform(last_name.begin(), last_name.end(), last_name.begin(), ::tolower);
-
-
     std::string user_name;
-
     // create user name in proper format
     user_name = first_name.substr(0, 1) + last_name;
 
     std::cout << "User name: " + user_name + "\n" << std::endl;
+
+    std::ofstream UserInfo("Users.txt", std::ios::app);
+    if (UserInfo.is_open()) {
+        UserInfo << user_name;
+        UserInfo.close();
+    } else {
+        std::cout << "Unable to open file" << std::endl;
+    }
+
+
     CreateEmployeePassword();
 }
 
 void CreateEmployeePassword() {
-
-    std::cout << "Enter employee's password." << std::endl;
-    std::cout << "Must contain a number and lowercase and uppercase letters." << std::endl;
-
+    bool again = true;
     char password[30];
-    std::cin >> password;
-    int i = 0;
-    int j = 0;
-    int k = 0;
+    while (again) {
+        std::cout << "Enter employee's password." << std::endl;
+        std::cout << "Must contain a number and lowercase and uppercase letters." << std::endl;
 
-    for (int count = 0; count < strlen(password); ++count) {
-        if (isupper(password[count])) {
-            i++;
+
+        std::cin >> password;
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        for (int count = 0; count < strlen(password); ++count) {
+            if (isupper(password[count])) {
+                i++;
+            }
+            if (islower(password[count])) {
+                j++;
+            }
+            if (isdigit(password[count])) {
+                k++;
+            }
         }
-        if (islower(password[count])) {
-            j++;
+        bool valid = false;
+        if (i > 0 && j > 0 && k > 0) {
+            valid = true;
         }
-        if (isdigit(password[count])) {
-            k++;
+
+        if (valid) {
+            std::cout << "valid" << std::endl;
+            again = false;
+        } else {
+            std::cout << "invalid" << std::endl;
         }
     }
-    bool valid = false;
-    if (i > 0 && j > 0 && k > 0) {
-        valid = true;
-    }
 
-    if (valid) {
-        std::cout << "valid" << std::endl;
+    std::string encrypted_str = encrypt_string(password);
+
+    std::ofstream UserInfo("Users.txt", std::ios::app);
+    if (UserInfo.is_open()) {
+        UserInfo << " " << encrypted_str << std::endl;
+        UserInfo.close();
     } else {
-        std::cout << "invalid" << std::endl;
+        std::cout << "Unable to open file";
     }
+}
 
+
+std::string encrypt_string(std::string str) {
+    if (str.length() == 1) {
+        return str;
+    } else {
+        return char((int) str[0] + 3) + encrypt_string(str.substr(1, str.length() - 1));
+    }
 }
