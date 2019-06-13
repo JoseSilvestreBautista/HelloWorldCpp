@@ -6,13 +6,6 @@
 
 #include "prototypes.h"
 
-
-std::vector<int> Audio;
-std::vector<int> Visual;
-std::vector<int> AudioMobile;
-std::vector<int> VisualMobile;
-
-
 int main() {  // drives the entire program by calling other functions.
     std::vector<std::string> productLineManufacturer;
     std::vector<std::string> productLineName;
@@ -20,10 +13,11 @@ int main() {  // drives the entire program by calling other functions.
     std::vector<std::string> serialsSeries;
     std::vector<int> productNumber;
 
+    ItemTypeSerial productSerial;
+
     productInfoLoad(productLineManufacturer, productLineItemType, productLineName);
-    productSerialInfoLoad(serialsSeries, productNumber);
-    processing(productLineManufacturer, productLineName, productLineItemType, productNumber, Audio, Visual, AudioMobile,
-               VisualMobile);
+    productSerialInfoLoad(serialsSeries, productNumber, productSerial);
+    processing(productLineManufacturer, productLineName, productLineItemType, productNumber, productSerial);
     return 0;
 }
 
@@ -38,8 +32,8 @@ void menu() { // main menu display
 
 
 void processing(std::vector<std::string> &productLineManufacturer, std::vector<std::string> &productLineName,
-                std::vector<std::string> &productLineItemType, std::vector<int> &productNumber, std::vector<int> &Audio,
-                std::vector<int> &Visual, std::vector<int> &AudioMobile, std::vector<int> &VisualMobile) {
+                std::vector<std::string> &productLineItemType, std::vector<int> &productNumber,
+                ItemTypeSerial &productSerial) {
 
     std::cout << "Hello User!\n" << std::endl; // user greeting
     std::cout << "Production Line Tracker\n" << std::endl;
@@ -53,8 +47,8 @@ void processing(std::vector<std::string> &productLineManufacturer, std::vector<s
         std::cin >> ask;
         switch (ask) {
             case 1 :
-                produceItems(productLineManufacturer, productLineName, productLineItemType, productNumber, Audio,
-                             Visual, AudioMobile, VisualMobile);
+                produceItems(productLineManufacturer, productLineName, productLineItemType, productNumber,
+                             productSerial);
                 break;
             case 2 :
                 AddEmployeeAccount();
@@ -81,9 +75,8 @@ void processing(std::vector<std::string> &productLineManufacturer, std::vector<s
 int produceItems(std::vector<std::string> &productLineManufacturer,
                  std::vector<std::string> &productLineName,
                  std::vector<std::string> &productLineItemType,
-                 std::vector<int> &productNumber, std::vector<int> &Audio,
-                 std::vector<int> &Visual, std::vector<int> &AudioMobile,
-                 std::vector<int> &VisualMobile) { // submenu from selecting 1. Produce Items from main menu
+                 std::vector<int> &productNumber,
+                 ItemTypeSerial &productSerial) { // submenu from selecting 1. Produce Items from main menu
 
     ReadAvailableDetailedProductsInFile(productLineManufacturer, productLineName, productLineItemType);
 
@@ -97,28 +90,28 @@ int produceItems(std::vector<std::string> &productLineManufacturer,
     productLineItemType[choice];
     itemType = productLineItemType[choice];
 
-    int holder;
+    int holder = 0;
 
-    if (itemType.compare("AM")) {
-        if (AudioMobile.empty()) {
-            AudioMobile.push_back(0);
+    if (itemType == "AM") {
+        if (productSerial.AudioMobile.empty()) {
+            productSerial.AudioMobile.push_back(0);
         }
-        holder = AudioMobile.back();
-    } else if (itemType.compare("VM")) {
-        if (VisualMobile.empty()) {
-            VisualMobile.push_back(0);
+        holder = productSerial.AudioMobile.back();
+    } else if (itemType == "VM") {
+        if (productSerial.VisualMobile.empty()) {
+            productSerial.VisualMobile.push_back(0);
         }
-        holder = VisualMobile.back();
-    } else if (itemType.compare("VI")) {
-        if (Visual.empty()) {
-            Visual.push_back(0);
+        holder = productSerial.VisualMobile.back();
+    } else if (itemType == "VI") {
+        if (productSerial.Visual.empty()) {
+            productSerial.Visual.push_back(0);
         }
-        holder = Visual.back();
-    } else if (itemType.compare("MM")) {
-        if (Audio.empty()) {
-            Audio.push_back(0);
+        holder = productSerial.Visual.back();
+    } else if (itemType == "MM") {
+        if (productSerial.Audio.empty()) {
+            productSerial.Audio.push_back(0);
         }
-        holder = Audio.back();
+        holder = productSerial.Audio.back();
     } else {
         std::cout << "Something went wrong." << std::endl;
     }
@@ -158,14 +151,14 @@ int produceItems(std::vector<std::string> &productLineManufacturer,
     productNumber.push_back(temp);
 
 
-    if (itemType.compare("AM")) {
-        AudioMobile.back() += i - 1;
-    } else if (itemType.compare("VM")) {
-        VisualMobile.back() += i - 1;
-    } else if (itemType.compare("VI")) {
-        Visual.back() += i - 1;
-    } else if (itemType.compare("MM")) {
-        Audio.back() += i - 1;
+    if (itemType == "AM") {
+        productSerial.AudioMobile.back() += i - 1;
+    } else if (itemType == "VM") {
+        productSerial.VisualMobile.back() += i - 1;
+    } else if (itemType == "VI") {
+        productSerial.Visual.back() += i - 1;
+    } else if (itemType == "MM") {
+        productSerial.Audio.back() += i - 1;
     } else {
         std::cout << "Something went wrong." << std::endl;
     }
@@ -312,7 +305,8 @@ void productInfoLoad(std::vector<std::string> &productLineManufacturer, std::vec
 
 }
 
-void productSerialInfoLoad(std::vector<std::string> &serialsSeries, std::vector<int> &productNumber) {
+void productSerialInfoLoad(std::vector<std::string> &serialsSeries, std::vector<int> &productNumber,
+                           ItemTypeSerial &productSerial) {
     std::string serial, line, firstNum, itemType, secondNum;
     int proNum, lastNums;
     std::ifstream myfile("Production.txt");
@@ -328,14 +322,14 @@ void productSerialInfoLoad(std::vector<std::string> &serialsSeries, std::vector<
 
         productNumber.push_back(proNum);
 
-        if (itemType.compare("AM")) {
-            AudioMobile.push_back(lastNums);
-        } else if (itemType.compare("VM")) {
-            VisualMobile.push_back(lastNums);
-        } else if (itemType.compare("VI")) {
-            Visual.push_back(lastNums);
-        } else if (itemType.compare("MM")) {
-            Audio.push_back(lastNums);
+        if (itemType == "AM") {
+            productSerial.AudioMobile.push_back(lastNums);
+        } else if (itemType == "VM") {
+            productSerial.VisualMobile.push_back(lastNums);
+        } else if (itemType == "VI") {
+            productSerial.Visual.push_back(lastNums);
+        } else if (itemType == "MM") {
+            productSerial.Audio.push_back(lastNums);
         } else {
             std::cout << "Something went wrong." << std::endl;
         }
