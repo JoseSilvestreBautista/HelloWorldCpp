@@ -7,17 +7,14 @@
 #include "prototypes.h"
 
 int main() {  // drives the entire program by calling other functions.
-    std::vector<std::string> productLineManufacturer;
-    std::vector<std::string> productLineName;
-    std::vector<std::string> productLineItemType;
     std::vector<std::string> serialsSeries;
     std::vector<int> productNumber;
-
+    ProductInfo myProduct;
     ItemTypeSerial productSerial;
 
-    productInfoLoad(productLineManufacturer, productLineItemType, productLineName);
+    productInfoLoad(myProduct);
     productSerialInfoLoad(serialsSeries, productNumber, productSerial);
-    processing(productLineManufacturer, productLineName, productLineItemType, productNumber, productSerial);
+    processing(myProduct, productNumber, productSerial);
     return 0;
 }
 
@@ -31,8 +28,7 @@ void menu() { // main menu display
 }
 
 
-void processing(std::vector<std::string> &productLineManufacturer, std::vector<std::string> &productLineName,
-                std::vector<std::string> &productLineItemType, std::vector<int> &productNumber,
+void processing(ProductInfo &myProduct, std::vector<int> &productNumber,
                 ItemTypeSerial &productSerial) {
 
     std::cout << "Hello User!\n" << std::endl; // user greeting
@@ -47,14 +43,14 @@ void processing(std::vector<std::string> &productLineManufacturer, std::vector<s
         std::cin >> ask;
         switch (ask) {
             case 1 :
-                produceItems(productLineManufacturer, productLineName, productLineItemType, productNumber,
+                produceItems(myProduct, productNumber,
                              productSerial);
                 break;
             case 2 :
                 AddEmployeeAccount();
                 break;
             case 3 :
-                addToProductLine(productLineManufacturer, productLineName, productLineItemType);
+                addToProductLine(myProduct);
                 break;
             case 4 :
                 break;
@@ -72,23 +68,21 @@ void processing(std::vector<std::string> &productLineManufacturer, std::vector<s
     }
 }
 
-int produceItems(std::vector<std::string> &productLineManufacturer,
-                 std::vector<std::string> &productLineName,
-                 std::vector<std::string> &productLineItemType,
+int produceItems(const ProductInfo &myProduct,
                  std::vector<int> &productNumber,
                  ItemTypeSerial &productSerial) { // submenu from selecting 1. Produce Items from main menu
 
-    ReadAvailableDetailedProductsInFile(productLineManufacturer, productLineName, productLineItemType);
+    ReadAvailableDetailedProductsInFile();
 
     int choice;
     std::cin >> choice;
     std::string threeLetterManufacturer;
-    productLineManufacturer[choice];
-    threeLetterManufacturer = productLineManufacturer[choice];
-    productLineName[choice];
+    myProduct.productLineManufacturer[choice];
+    threeLetterManufacturer = myProduct.productLineManufacturer[choice];
+    myProduct.productLineName[choice];
     std::string itemType;
-    productLineItemType[choice];
-    itemType = productLineItemType[choice];
+    myProduct.productLineItemType[choice];
+    itemType = myProduct.productLineItemType[choice];
 
     int holder = 0;
 
@@ -115,6 +109,7 @@ int produceItems(std::vector<std::string> &productLineManufacturer,
     } else {
         std::cout << "Something went wrong." << std::endl;
     }
+
 
     std::cout << "Enter the number of items that were produced\n";
 
@@ -169,36 +164,33 @@ int produceItems(std::vector<std::string> &productLineManufacturer,
 }
 
 
-void addToProductLine(std::vector<std::string> &productLineManufacturer, std::vector<std::string> &productLineName,
-                      std::vector<std::string> &productLineItemType) {
+void addToProductLine(ProductInfo &myProduct) {
 
     // Add three new products to the product line
-    processingNewProductInfo(productLineManufacturer, productLineName, productLineItemType);
-    processingNewProductInfo(productLineManufacturer, productLineName, productLineItemType);
-    processingNewProductInfo(productLineManufacturer, productLineName, productLineItemType);
+    processingNewProductInfo(myProduct);
+    processingNewProductInfo(myProduct);
+    processingNewProductInfo(myProduct);
 
     // Output the products in the product line
-    newAvailableDetailedProducts(productLineManufacturer, productLineName, productLineItemType);
-    newAvailableDetailedProductsToFile(productLineManufacturer, productLineName, productLineItemType);
+    newAvailableDetailedProducts(myProduct);
+    newAvailableDetailedProductsToFile(myProduct);
 
 
 }
 
-void processingNewProductInfo(std::vector<std::string> &productLineManufacturer,
-                              std::vector<std::string> &productLineName,
-                              std::vector<std::string> &productLineItemType) {
+void processingNewProductInfo(ProductInfo &myProduct) {
 
     std::cout << "Adding a new product to the product line\n";
     std::cout << "Enter the Manufacturer\n";
     std::string manufacturer;
     std::cin >> manufacturer;
     // add manufacturer to the vector here
-    productLineManufacturer.push_back(manufacturer);
+    myProduct.productLineManufacturer.push_back(manufacturer);
     std::cout << "Enter the Product Name\n";
     std::string prodName;
     std::cin >> prodName;
     // add prodName to the vector
-    productLineName.push_back(prodName);
+    myProduct.productLineName.push_back(prodName);
 
     std::cout << "Enter the item type\n";
     std::cout << "1. Audio\n" <<
@@ -228,37 +220,33 @@ void processingNewProductInfo(std::vector<std::string> &productLineManufacturer,
             break;
     }
     // add itemTypeCode to the vector
-    productLineItemType.push_back(itemTypeCode);
+    myProduct.productLineItemType.push_back(itemTypeCode);
 
 }
 
 
-void newAvailableDetailedProducts(std::vector<std::string> &productLineManufacturer,
-                                  std::vector<std::string> &productLineName,
-                                  std::vector<std::string> &productLineItemType) {
+void newAvailableDetailedProducts(const ProductInfo &myProduct) {
     std::cout << "The products in the Product Line are:\n";
-    for (int productLineItemNum = 0; productLineItemNum < productLineItemType.size(); productLineItemNum++) {
+    for (int productLineItemNum = 0; productLineItemNum < myProduct.productLineItemType.size(); productLineItemNum++) {
 
         std::cout << productLineItemNum << ". " << std::flush;
-        std::cout << productLineManufacturer[productLineItemNum] << ", ";
-        std::cout << productLineName[productLineItemNum] << ", ";
-        std::cout << productLineItemType[productLineItemNum] << "\n";
+        std::cout << myProduct.productLineManufacturer[productLineItemNum] << ",";
+        std::cout << myProduct.productLineName[productLineItemNum] << ",";
+        std::cout << myProduct.productLineItemType[productLineItemNum] << "\n";
 
     }
 
     std::cout << std::endl;
 }
 
-void newAvailableDetailedProductsToFile(std::vector<std::string> &productLineManufacturer,
-                                        std::vector<std::string> &productLineName,
-                                        std::vector<std::string> &productLineItemType) {
-    for (int productLineItemNum = 0; productLineItemNum < productLineItemType.size(); productLineItemNum++) {
+void newAvailableDetailedProductsToFile(const ProductInfo &myProduct) {
+    for (int productLineItemNum = 0; productLineItemNum < myProduct.productLineItemType.size(); productLineItemNum++) {
         std::ofstream catalogfile("productcatalog.txt", std::ios::app);
         if (catalogfile.is_open()) {
 
-            catalogfile << productLineManufacturer[productLineItemNum] << ", ";
-            catalogfile << productLineName[productLineItemNum] << ", ";
-            catalogfile << productLineItemType[productLineItemNum] << "\n";
+            catalogfile << myProduct.productLineManufacturer[productLineItemNum] << ",";
+            catalogfile << myProduct.productLineName[productLineItemNum] << ",";
+            catalogfile << myProduct.productLineItemType[productLineItemNum] << "\n";
             catalogfile.close();
         } else {
             std::cout << "Unable to open file" << std::endl;
@@ -268,9 +256,7 @@ void newAvailableDetailedProductsToFile(std::vector<std::string> &productLineMan
     std::cout << std::endl;
 }
 
-void ReadAvailableDetailedProductsInFile(std::vector<std::string> &productLineManufacturer,
-                                         std::vector<std::string> &productLineName,
-                                         std::vector<std::string> &productLineItemType) {
+void ReadAvailableDetailedProductsInFile() {
     std::cout << "The products in the Product Line are:\n";
     std::string line;
     int counter = 0;
@@ -287,19 +273,18 @@ void ReadAvailableDetailedProductsInFile(std::vector<std::string> &productLineMa
 
 }
 
-void productInfoLoad(std::vector<std::string> &productLineManufacturer, std::vector<std::string> &productLineName,
-                     std::vector<std::string> &productLineItemType) {
+void productInfoLoad(ProductInfo &myProduct) {
     std::string manu, prodnam, type, line;
     std::ifstream catalogfile("productcatalog.txt");
 
     while (getline(catalogfile, line)) {
         std::stringstream ss(line);
         getline(ss, manu, ',');
-        getline(ss, type, ',');
         getline(ss, prodnam, ',');
-        productLineManufacturer.push_back(manu);
-        productLineName.push_back(prodnam);
-        productLineItemType.push_back(type);
+        getline(ss, type);
+        myProduct.productLineManufacturer.push_back(manu);
+        myProduct.productLineName.push_back(prodnam);
+        myProduct.productLineItemType.push_back(type);
     }
 
 
@@ -421,3 +406,4 @@ std::string encrypt_string(std::string str) {
         return char((int) str[0] + 3) + encrypt_string(str.substr(1, str.length() - 1));
     }
 }
+
