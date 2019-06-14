@@ -15,11 +15,28 @@
 #include <cstdlib>
 #include <sstream>
 #include <cctype>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
+
+
+//Structures that hold variables
+
+struct ItemTypeSerial {
+    std::vector<int> Audio;
+    std::vector<int> Visual;
+    std::vector<int> AudioMobile;
+    std::vector<int> VisualMobile;
+};
+
+struct ProductInfo {
+    std::vector<std::string> productLineManufacturer;
+    std::vector<std::string> productLineName;
+    std::vector<std::string> productLineItemType;
+};
 
 
 // these are prototypes
+
 /**
  * @brief  Is the main menu display for employees.
  */
@@ -29,18 +46,13 @@ void menu();
  * @brief Process the user's main menu selection and prevents improper selection.
  * @param
  */
-void processing(std::vector<std::string> &productLineManufacturer, std::vector<std::string> &productLineName,
-                std::vector<std::string> &productLineItemType, std::vector<int> &productNumber, std::vector<int> &Audio,
-                std::vector<int> &Visual, std::vector<int> &AudioMobile, std::vector<int> &VisualMobile);
+void processing(ProductInfo &myProduct, std::vector<int> &productNumber, ItemTypeSerial &);
+
 /**
  * @brief  Function that records products made using serial numbers.
  * The result of choosing produce items from main menu.
  */
-int produceItems(std::vector<std::string> &productLineManufacturer,
-                 std::vector<std::string> &productLineName,
-                 std::vector<std::string> &productLineItemType,
-                 std::vector<int> &productNumber, std::vector<int> &Audio,
-                 std::vector<int> &Visual, std::vector<int> &AudioMobile, std::vector<int> &VisualMobile);
+int produceItems(const ProductInfo &myProduct, std::vector<int> &productNumber, ItemTypeSerial &);
 
 
 /**
@@ -50,9 +62,7 @@ int produceItems(std::vector<std::string> &productLineManufacturer,
  * @param productLineItemType
  */
 
-void addToProductLine(std::vector<std::string> &productLineManufacturer,
-                      std::vector<std::string> &productLineName,
-                      std::vector<std::string> &productLineItemType);
+void addToProductLine(ProductInfo &myProduct);
 
 /**
  * @brief the user creates an employee user name with first name and last name.
@@ -71,9 +81,7 @@ void CreateEmployeePassword();
  * @param productLineItemType
  */
 
-void processingNewProductInfo(std::vector<std::string> &productLineManufacturer,
-                              std::vector<std::string> &productLineName,
-                              std::vector<std::string> &productLineItemType);
+void processingNewProductInfo(ProductInfo &myProduct);
 
 /**
  * @brief displays newly add products to the user
@@ -81,9 +89,7 @@ void processingNewProductInfo(std::vector<std::string> &productLineManufacturer,
  * @param productLineName
  * @param productLineItemType
  */
-void newAvailableDetailedProducts(std::vector<std::string> &productLineManufacturer,
-                                  std::vector<std::string> &productLineName,
-                                  std::vector<std::string> &productLineItemType);
+void newAvailableDetailedProducts(const ProductInfo &myProduct);
 
 /**
  * @brief saves the newly added products to a file for safe keeping
@@ -91,9 +97,8 @@ void newAvailableDetailedProducts(std::vector<std::string> &productLineManufactu
  * @param productLineName
  * @param productLineItemType
  */
-void newAvailableDetailedProductsToFile(std::vector<std::string> &productLineManufacturer,
-                                        std::vector<std::string> &productLineName,
-                                        std::vector<std::string> &productLineItemType);
+void newAvailableDetailedProductsToFile(const ProductInfo &myProduct);
+
 /**
  * @brief retrieves the products saved to a file and newly created products and displays them
  * @param productLineManufacturer
@@ -101,9 +106,7 @@ void newAvailableDetailedProductsToFile(std::vector<std::string> &productLineMan
  * @param productLineItemType
  */
 
-void ReadAvailableDetailedProductsInFile(std::vector<std::string> &productLineManufacturer,
-                                         std::vector<std::string> &productLineName,
-                                         std::vector<std::string> &productLineItemType);
+void ReadAvailableDetailedProductsInFile();
 
 /**
  * @brief retrieves saved product info to the program
@@ -111,15 +114,17 @@ void ReadAvailableDetailedProductsInFile(std::vector<std::string> &productLineMa
  * @param productLineName
  * @param productLineItemType
  */
-void productInfoLoad(std::vector<std::string> &productLineManufacturer, std::vector<std::string> &productLineName,
-                     std::vector<std::string> &productLineItemType);
+void productInfoLoad(ProductInfo &myProduct);
+
 /**
  * @brief loads saved product numbers and serial numbers into the program
  * @param serialsSeries
  * @param productNumber
  */
-void productSerialInfoLoad(std::vector<std::string> &serialsSeries, std::vector<int> &productNumber);
+void productSerialInfoLoad(std::vector<int> &productNumber, ItemTypeSerial &);
 
+std::string encrypt_string(std::string str);
 
+void DisplayProductionStatistics(std::vector<int> &productNumber, ItemTypeSerial &);
 
 #endif //HELLOWORLD_PROTOTYPES_H
