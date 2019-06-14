@@ -35,7 +35,6 @@ void menu() { // main menu display
 void processing(ProductInfo &myProduct, int &productNumber,
                 ItemTypeSerial &productSerial, std::vector<ProductInfo> &Catalog) {
 
-    std::cout << "Hello User!\n" << std::endl; // user greeting
     std::cout << "Production Line Tracker\n" << std::endl;
 
     // main menu decision function. passes user to next submenu and
@@ -76,6 +75,8 @@ int produceItems(const ProductInfo &myProduct,
                  int &productNumber,
                  ItemTypeSerial &productSerial,
                  std::vector<ProductInfo> &Catalog) { // submenu from selecting 1. Produce Items from main menu
+
+    std::cout << "Which product is to be created. Select by the number.\n" << std::endl; // user greeting
 
     for (int index = 0; index < Catalog.size(); index++) {
         std::cout << index << ". " << Catalog[index].productLineManufacturer << ", " << Catalog[index].productLineName
