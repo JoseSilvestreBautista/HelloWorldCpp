@@ -7,14 +7,18 @@
 #include "prototypes.h"
 
 int main() {  // drives the entire program by calling other functions.
-    std::vector<std::string> serialsSeries;
-    std::vector<int> productNumber;
     ProductInfo myProduct;
-    ItemTypeSerial productSerial;
+    ItemTypeSerial productSerial{};
+    productSerial.audio_count = 0;
+    productSerial.visual_count = 0;
+    productSerial.visual_mobile_count = 0;
+    productSerial.audio_mobile_count = 0;
+    int productNumber = 0;
+    std::vector<ProductInfo> Catalog;
 
-    productInfoLoad(myProduct);
-    productSerialInfoLoad(serialsSeries, productNumber, productSerial);
-    processing(myProduct, productNumber, productSerial);
+    productInfoLoad(myProduct, Catalog);
+    productSerialInfoLoad(productNumber, productSerial);
+    processing(myProduct, productNumber, productSerial, Catalog);
     return 0;
 }
 
@@ -28,8 +32,8 @@ void menu() { // main menu display
 }
 
 
-void processing(ProductInfo &myProduct, std::vector<int> &productNumber,
-                ItemTypeSerial &productSerial) {
+void processing(ProductInfo &myProduct, int &productNumber,
+                ItemTypeSerial &productSerial, std::vector<ProductInfo> &Catalog) {
 
     std::cout << "Hello User!\n" << std::endl; // user greeting
     std::cout << "Production Line Tracker\n" << std::endl;
@@ -43,8 +47,7 @@ void processing(ProductInfo &myProduct, std::vector<int> &productNumber,
         std::cin >> ask;
         switch (ask) {
             case 1 :
-                produceItems(myProduct, productNumber,
-                             productSerial);
+                produceItems(myProduct, productNumber, productSerial, Catalog);
                 break;
             case 2 :
                 AddEmployeeAccount();
@@ -70,43 +73,32 @@ void processing(ProductInfo &myProduct, std::vector<int> &productNumber,
 }
 
 int produceItems(const ProductInfo &myProduct,
-                 std::vector<int> &productNumber,
-                 ItemTypeSerial &productSerial) { // submenu from selecting 1. Produce Items from main menu
+                 int &productNumber,
+                 ItemTypeSerial &productSerial,
+                 std::vector<ProductInfo> &Catalog) { // submenu from selecting 1. Produce Items from main menu
 
-    ReadAvailableDetailedProductsInFile();
+    for (int index = 0; index < Catalog.size(); index++) {
+        std::cout << index << ". " << Catalog[index].productLineManufacturer << ", " << Catalog[index].productLineName
+                  << ", " << Catalog[index].productLineItemType << std::endl;
+    }
 
     int choice;
     std::cin >> choice;
     std::string threeLetterManufacturer;
-    myProduct.productLineManufacturer[choice];
-    threeLetterManufacturer = myProduct.productLineManufacturer[choice];
-    myProduct.productLineName[choice];
+    threeLetterManufacturer = Catalog[choice].productLineManufacturer;
     std::string itemType;
-    myProduct.productLineItemType[choice];
-    itemType = myProduct.productLineItemType[choice];
+    itemType = Catalog[choice].productLineItemType;
 
     int holder = 0;
 
     if (itemType == "AM") {
-        if (productSerial.AudioMobile.empty()) {
-            productSerial.AudioMobile.push_back(0);
-        }
-        holder = productSerial.AudioMobile.back();
+        holder = productSerial.audio_mobile_count;
     } else if (itemType == "VM") {
-        if (productSerial.VisualMobile.empty()) {
-            productSerial.VisualMobile.push_back(0);
-        }
-        holder = productSerial.VisualMobile.back();
+        holder = productSerial.visual_mobile_count;
     } else if (itemType == "VI") {
-        if (productSerial.Visual.empty()) {
-            productSerial.Visual.push_back(0);
-        }
-        holder = productSerial.Visual.back();
+        holder = productSerial.visual_count;
     } else if (itemType == "MM") {
-        if (productSerial.Audio.empty()) {
-            productSerial.Audio.push_back(0);
-        }
-        holder = productSerial.Audio.back();
+        holder = productSerial.audio_count;
     } else {
         std::cout << "Something went wrong." << std::endl;
     }
@@ -118,53 +110,45 @@ int produceItems(const ProductInfo &myProduct,
     int amountProduced;
     std::cin >> amountProduced;
 
-    if (productNumber.empty()) {
-        productNumber.push_back(0);
+    if (itemType == "AM") {
+        productSerial.audio_mobile_count += amountProduced;
+    } else if (itemType == "VM") {
+        productSerial.visual_mobile_count += amountProduced;
+    } else if (itemType == "VI") {
+        productSerial.visual_count += amountProduced;
+    } else if (itemType == "MM") {
+        productSerial.audio_count += amountProduced;
+    } else {
+        std::cout << "Something went wrong." << std::endl;
     }
-
 
     std::stringstream ss;
 
     int i;
     for (i = 1; i < amountProduced + 1; i++) {
+        productNumber++;
 
-        ss << productNumber.back() + i << ". " << threeLetterManufacturer.substr(0, 3) << itemType << std::setfill('0')
-           << std::setw(5)
-           << holder + i << std::endl;
+        holder++;
+        ss << productNumber << ". " << threeLetterManufacturer.substr(0, 3) << itemType << std::setfill('0')
+           << std::setw(5) << holder << std::endl;
 
-        std::ofstream myfile("ProductionLog.csv ",
-                             std::ios::app); // This create the file Production.txt and appends data.
+        // This create the file Production.txt and appends data.
+        std::ofstream myfile("ProductionLog.csv ", std::ios::app);
+
         myfile.is_open();// opens the file
 
-        myfile << productNumber.back() + i << ". " << threeLetterManufacturer.substr(0, 3) << itemType
-               << std::setfill('0')
-               << std::setw(5)
-               << holder + i << std::endl;
+        myfile << productNumber << ", " << threeLetterManufacturer.substr(0, 3) << itemType << std::setfill('0')
+               << std::setw(5) << holder << std::endl;
 
         myfile.close();// closes the Production.txt fil
 
     }
-    int temp = productNumber.back() + i - 1;
-    productNumber.push_back(temp);
 
-
-    if (itemType == "AM") {
-        productSerial.AudioMobile.back() += i - 1;
-    } else if (itemType == "VM") {
-        productSerial.VisualMobile.back() += i - 1;
-    } else if (itemType == "VI") {
-        productSerial.Visual.back() += i - 1;
-    } else if (itemType == "MM") {
-        productSerial.Audio.back() += i - 1;
-    } else {
-        std::cout << "Something went wrong." << std::endl;
-    }
     std::cout << ss.str() << std::endl;
 
     return 0;
 
 }
-
 
 void addToProductLine(ProductInfo &myProduct) {
 
@@ -187,12 +171,12 @@ void processingNewProductInfo(ProductInfo &myProduct) {
     std::string manufacturer;
     std::cin >> manufacturer;
     // add manufacturer to the vector here
-    myProduct.productLineManufacturer.push_back(manufacturer);
+    myProduct.productLineManufacturer = manufacturer;
     std::cout << "Enter the Product Name\n";
     std::string prodName;
     std::cin >> prodName;
     // add prodName to the vector
-    myProduct.productLineName.push_back(prodName);
+    myProduct.productLineName = prodName;
 
     std::cout << "Enter the item type\n";
     std::cout << "1. Audio\n" <<
@@ -222,7 +206,7 @@ void processingNewProductInfo(ProductInfo &myProduct) {
             break;
     }
     // add itemTypeCode to the vector
-    myProduct.productLineItemType.push_back(itemTypeCode);
+    myProduct.productLineItemType = itemTypeCode;
 
 }
 
@@ -243,13 +227,13 @@ void newAvailableDetailedProducts(const ProductInfo &myProduct) {
 
 void newAvailableDetailedProductsToFile(const ProductInfo &myProduct) {
     for (int productLineItemNum = 0; productLineItemNum < myProduct.productLineItemType.size(); productLineItemNum++) {
-        std::ofstream catalogfile("ProductLine.csv", std::ios::app);
-        if (catalogfile.is_open()) {
+        std::ofstream catalog_file("ProductLine.csv", std::ios::app);
+        if (catalog_file.is_open()) {
 
-            catalogfile << myProduct.productLineManufacturer[productLineItemNum] << ",";
-            catalogfile << myProduct.productLineName[productLineItemNum] << ",";
-            catalogfile << myProduct.productLineItemType[productLineItemNum] << "\n";
-            catalogfile.close();
+            catalog_file << myProduct.productLineManufacturer[productLineItemNum] << ",";
+            catalog_file << myProduct.productLineName[productLineItemNum] << ",";
+            catalog_file << myProduct.productLineItemType[productLineItemNum] << "\n";
+            catalog_file.close();
         } else {
             std::cout << "Unable to open file" << std::endl;
         }
@@ -258,47 +242,31 @@ void newAvailableDetailedProductsToFile(const ProductInfo &myProduct) {
     std::cout << std::endl;
 }
 
-void ReadAvailableDetailedProductsInFile() {
-    std::cout << "The products in the Product Line are:\n";
-    std::string line;
-    int counter = 0;
-    std::ifstream catalogfile("ProductLine.csv");
-    if (catalogfile.is_open()) {
-        while (getline(catalogfile, line)) {
-            std::cout << counter++ << ". " << line << '\n';
-        }
-        catalogfile.close();
-    } else {
-        std::cout << "Unable to open file" << std::endl;
-    }
-    std::cout << std::endl;
 
-}
-
-void productInfoLoad(ProductInfo &myProduct) {
+void productInfoLoad(ProductInfo &myProduct, std::vector<ProductInfo> &Catalog) {
     std::string manu, prodnam, type, line;
-    std::ifstream catalogfile("ProductLine.csv");
+    std::ifstream catalog_file("ProductLine.csv");
 
-    while (getline(catalogfile, line)) {
+    while (getline(catalog_file, line)) {
         std::stringstream ss(line);
         getline(ss, manu, ',');
         getline(ss, prodnam, ',');
         getline(ss, type);
-        myProduct.productLineManufacturer.push_back(manu);
-        myProduct.productLineName.push_back(prodnam);
-        myProduct.productLineItemType.push_back(type);
+        myProduct.productLineManufacturer = manu;
+        myProduct.productLineName = prodnam;
+        myProduct.productLineItemType = type;
+        Catalog.push_back(myProduct);
     }
-
 
 }
 
-void productSerialInfoLoad(std::vector<std::string> &serialsSeries, std::vector<int> &productNumber,
-                           ItemTypeSerial &productSerial) {
+void productSerialInfoLoad(int &productNumber, ItemTypeSerial &productSerial) {
     std::string serial, line, firstNum, itemType, secondNum;
-    int proNum, lastNums;
+    int proNum;
     std::ifstream myfile("ProductionLog.csv ");
 
     while (getline(myfile, line)) {
+        int lastNums;
         std::stringstream ss(line);
         ss >> firstNum;
         ss >> serial;
@@ -307,16 +275,16 @@ void productSerialInfoLoad(std::vector<std::string> &serialsSeries, std::vector<
         secondNum = serial.substr(5, 6);
         lastNums = std::stoi(secondNum);
 
-        productNumber.push_back(proNum);
+        productNumber = proNum;
 
         if (itemType == "AM") {
-            productSerial.AudioMobile.push_back(lastNums);
+            productSerial.audio_mobile_count = lastNums;
         } else if (itemType == "VM") {
-            productSerial.VisualMobile.push_back(lastNums);
+            productSerial.visual_mobile_count = lastNums;
         } else if (itemType == "VI") {
-            productSerial.Visual.push_back(lastNums);
+            productSerial.visual_count = lastNums;
         } else if (itemType == "MM") {
-            productSerial.Audio.push_back(lastNums);
+            productSerial.audio_count = lastNums;
         } else {
             std::cout << "Something went wrong." << std::endl;
         }
@@ -348,7 +316,6 @@ void AddEmployeeAccount() {
         std::cout << "Unable to open file" << std::endl;
     }
 
-
     CreateEmployeePassword();
 }
 
@@ -358,7 +325,6 @@ void CreateEmployeePassword() {
     while (again) {
         std::cout << "Enter employee's password." << std::endl;
         std::cout << "Must contain a number and lowercase and uppercase letters." << std::endl;
-
 
         std::cin >> password;
         int i = 0;
@@ -409,34 +375,14 @@ std::string encrypt_string(std::string str) {
     }
 }
 
-void DisplayProductionStatistics(std::vector<int> &productNumber, ItemTypeSerial &productSerial) {
+void DisplayProductionStatistics(int &productNumber, ItemTypeSerial &productSerial) {
 
-    if (productSerial.AudioMobile.empty()) {
-        productSerial.AudioMobile.push_back(0);
-    } else {
-        std::cout << "There is an error" << std::endl;
-    }
-    if (productSerial.VisualMobile.empty()) {
-        productSerial.VisualMobile.push_back(0);
-    } else {
-        std::cout << "There is an error" << std::endl;
-    }
-    if (productSerial.Visual.empty()) {
-        productSerial.Visual.push_back(0);
-    } else {
-        std::cout << "There is an error" << std::endl;
-    }
-    if (productSerial.Audio.empty()) {
-        productSerial.Audio.push_back(0);
-    } else {
-        std::cout << "There is an error" << std::endl;
-    }
 
-    std::cout << "Total Product Created: " << productNumber.back() << std::endl;
-    std::cout << "Total Audio Products: " << productSerial.Audio.back() << std::endl;
-    std::cout << "Total AudioMobile Products: " << productSerial.AudioMobile.back() << std::endl;
-    std::cout << "Total Visual Products: " << productSerial.Visual.back() << std::endl;
-    std::cout << "Total VisualMobile Products: " << productSerial.VisualMobile.back() << std::endl;
+    std::cout << "Total Product Created: " << productNumber << std::endl;
+    std::cout << "Total Audio Products: " << productSerial.audio_count << std::endl;
+    std::cout << "Total AudioMobile Products: " << productSerial.audio_mobile_count << std::endl;
+    std::cout << "Total Visual Products: " << productSerial.visual_count << std::endl;
+    std::cout << "Total VisualMobile Products: " << productSerial.visual_mobile_count << std::endl;
 
     std::cout << std::endl;
 }
