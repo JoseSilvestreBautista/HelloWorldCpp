@@ -22,16 +22,16 @@
 //Structures that hold variables
 
 struct ItemTypeSerial {
-    std::vector<int> Audio;
-    std::vector<int> Visual;
-    std::vector<int> AudioMobile;
-    std::vector<int> VisualMobile;
+    int audio_count;
+    int visual_count;
+    int audio_mobile_count;
+    int visual_mobile_count;
 };
 
 struct ProductInfo {
-    std::vector<std::string> productLineManufacturer;
-    std::vector<std::string> productLineName;
-    std::vector<std::string> productLineItemType;
+    std::string productLineManufacturer;
+    std::string productLineName;
+    std::string productLineItemType;
 };
 
 
@@ -46,13 +46,13 @@ void menu();
  * @brief Process the user's main menu selection and prevents improper selection.
  * @param
  */
-void processing(ProductInfo &myProduct, std::vector<int> &productNumber, ItemTypeSerial &);
+void processing(ProductInfo &myProduct, int &productNumber, ItemTypeSerial &, std::vector<ProductInfo> &Catalog);
 
 /**
  * @brief  Function that records products made using serial numbers.
  * The result of choosing produce items from main menu.
  */
-int produceItems(const ProductInfo &myProduct, std::vector<int> &productNumber, ItemTypeSerial &);
+int produceItems(const ProductInfo &myProduct, int &productNumber, ItemTypeSerial &, std::vector<ProductInfo> &Catalog);
 
 
 /**
@@ -99,14 +99,6 @@ void newAvailableDetailedProducts(const ProductInfo &myProduct);
  */
 void newAvailableDetailedProductsToFile(const ProductInfo &myProduct);
 
-/**
- * @brief retrieves the products saved to a file and newly created products and displays them
- * @param productLineManufacturer
- * @param productLineName
- * @param productLineItemType
- */
-
-void ReadAvailableDetailedProductsInFile();
 
 /**
  * @brief retrieves saved product info to the program
@@ -114,17 +106,17 @@ void ReadAvailableDetailedProductsInFile();
  * @param productLineName
  * @param productLineItemType
  */
-void productInfoLoad(ProductInfo &myProduct);
+void productInfoLoad(ProductInfo &myProduct, std::vector<ProductInfo> &Catalog);
 
 /**
  * @brief loads saved product numbers and serial numbers into the program
  * @param serialsSeries
  * @param productNumber
  */
-void productSerialInfoLoad(std::vector<int> &productNumber, ItemTypeSerial &);
+void productSerialInfoLoad(int &productNumber, ItemTypeSerial &);
 
 std::string encrypt_string(std::string str);
 
-void DisplayProductionStatistics(std::vector<int> &productNumber, ItemTypeSerial &);
+void DisplayProductionStatistics(int &productNumber, ItemTypeSerial &);
 
 #endif //HELLOWORLD_PROTOTYPES_H
