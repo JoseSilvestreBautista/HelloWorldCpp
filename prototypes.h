@@ -46,7 +46,8 @@ void menu();
  * @brief Process the user's main menu selection and prevents improper selection.
  * @param
  */
-void processing(ProductInfo &myProduct, int &productNumber, ItemTypeSerial &, std::vector<ProductInfo> &Catalog);
+void processing(ProductInfo &myProduct, int &productNumber, ItemTypeSerial &, std::vector<ProductInfo> &Catalog,
+                std::vector<ProductInfo> &new_Product_Info);
 
 /**
  * @brief  Function that records products made using serial numbers.
@@ -62,7 +63,7 @@ int produceItems(const ProductInfo &myProduct, int &productNumber, ItemTypeSeria
  * @param productLineItemType
  */
 
-void addToProductLine(ProductInfo &myProduct);
+void addToProductLine(ProductInfo &myProduct, std::vector<ProductInfo> &new_Product_Info);
 
 /**
  * @brief the user creates an employee user name with first name and last name.
@@ -81,7 +82,7 @@ void CreateEmployeePassword();
  * @param productLineItemType
  */
 
-void processingNewProductInfo(ProductInfo &myProduct);
+void processingNewProductInfo(ProductInfo &myProduct, std::vector<ProductInfo> &new_Product_Info);
 
 /**
  * @brief displays newly add products to the user
@@ -89,7 +90,7 @@ void processingNewProductInfo(ProductInfo &myProduct);
  * @param productLineName
  * @param productLineItemType
  */
-void newAvailableDetailedProducts(const ProductInfo &myProduct);
+void newAvailableDetailedProducts(const ProductInfo &myProduct, std::vector<ProductInfo> &new_Product_Info);
 
 /**
  * @brief saves the newly added products to a file for safe keeping
@@ -97,7 +98,7 @@ void newAvailableDetailedProducts(const ProductInfo &myProduct);
  * @param productLineName
  * @param productLineItemType
  */
-void newAvailableDetailedProductsToFile(const ProductInfo &myProduct);
+void newAvailableDetailedProductsToFile(const ProductInfo &myProduct, std::vector<ProductInfo> &new_Product_Info);
 
 
 /**
