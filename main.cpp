@@ -17,7 +17,6 @@ int main() {  // drives the entire program by calling other functions.
     std::vector<ProductInfo> Catalog;
     std::vector<ProductInfo> new_Product_Info;
 
-    productInfoLoad(myProduct, Catalog);
     productSerialInfoLoad(productNumber, productSerial);
     processing(myProduct, productNumber, productSerial, Catalog, new_Product_Info);
     return 0;
@@ -48,6 +47,7 @@ void processing(ProductInfo &myProduct, int &productNumber,
         std::cin >> ask;
         switch (ask) {
             case 1 :
+                productInfoLoad(myProduct, Catalog);
                 produceItems(myProduct, productNumber, productSerial, Catalog);
                 break;
             case 2 :
@@ -214,7 +214,7 @@ void processingNewProductInfo(ProductInfo &myProduct, std::vector<ProductInfo> &
 
 
 void newAvailableDetailedProducts(const ProductInfo &myProduct, std::vector<ProductInfo> &new_Product_Info) {
-    std::cout << "The products in the Product Line are:\n";
+    std::cout << "These products have been added to the Product Line:\n";
     for (auto &productLineItemNum : new_Product_Info) {
 
         std::cout << productLineItemNum.productLineManufacturer << ",";
