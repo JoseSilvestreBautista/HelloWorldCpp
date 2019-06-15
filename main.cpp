@@ -15,10 +15,11 @@ int main() {  // drives the entire program by calling other functions.
     productSerial.audio_mobile_count = 0;
     int productNumber = 0;
     std::vector<ProductInfo> Catalog;
+    std::vector<ProductInfo> new_Product_Info;
 
     productInfoLoad(myProduct, Catalog);
     productSerialInfoLoad(productNumber, productSerial);
-    processing(myProduct, productNumber, productSerial, Catalog);
+    processing(myProduct, productNumber, productSerial, Catalog, new_Product_Info);
     return 0;
 }
 
@@ -33,7 +34,8 @@ void menu() { // main menu display
 
 
 void processing(ProductInfo &myProduct, int &productNumber,
-                ItemTypeSerial &productSerial, std::vector<ProductInfo> &Catalog) {
+                ItemTypeSerial &productSerial, std::vector<ProductInfo> &Catalog,
+                std::vector<ProductInfo> &new_Product_Info) {
 
     std::cout << "Production Line Tracker\n" << std::endl;
 
@@ -52,7 +54,7 @@ void processing(ProductInfo &myProduct, int &productNumber,
                 AddEmployeeAccount();
                 break;
             case 3 :
-                addToProductLine(myProduct);
+                addToProductLine(myProduct, new_Product_Info);
                 break;
             case 4 :
                 DisplayProductionStatistics(productNumber, productSerial);
@@ -104,9 +106,7 @@ int produceItems(const ProductInfo &myProduct,
         std::cout << "Something went wrong." << std::endl;
     }
 
-
     std::cout << "Enter the number of items that were produced\n";
-
 
     int amountProduced;
     std::cin >> amountProduced;
@@ -151,21 +151,21 @@ int produceItems(const ProductInfo &myProduct,
 
 }
 
-void addToProductLine(ProductInfo &myProduct) {
+void addToProductLine(ProductInfo &myProduct, std::vector<ProductInfo> &new_Product_Info) {
 
     // Add three new products to the product line
-    processingNewProductInfo(myProduct);
-    processingNewProductInfo(myProduct);
-    processingNewProductInfo(myProduct);
+    processingNewProductInfo(myProduct, new_Product_Info);
+    processingNewProductInfo(myProduct, new_Product_Info);
+    processingNewProductInfo(myProduct, new_Product_Info);
 
     // Output the products in the product line
-    newAvailableDetailedProducts(myProduct);
-    newAvailableDetailedProductsToFile(myProduct);
+    newAvailableDetailedProducts(myProduct, new_Product_Info);
+    newAvailableDetailedProductsToFile(myProduct, new_Product_Info);
 
 
 }
 
-void processingNewProductInfo(ProductInfo &myProduct) {
+void processingNewProductInfo(ProductInfo &myProduct, std::vector<ProductInfo> &new_Product_Info) {
 
     std::cout << "Adding a new product to the product line\n";
     std::cout << "Enter the Manufacturer\n";
@@ -208,32 +208,32 @@ void processingNewProductInfo(ProductInfo &myProduct) {
     }
     // add itemTypeCode to the vector
     myProduct.productLineItemType = itemTypeCode;
+    new_Product_Info.push_back(myProduct);
 
 }
 
 
-void newAvailableDetailedProducts(const ProductInfo &myProduct) {
+void newAvailableDetailedProducts(const ProductInfo &myProduct, std::vector<ProductInfo> &new_Product_Info) {
     std::cout << "The products in the Product Line are:\n";
-    for (int productLineItemNum = 0; productLineItemNum < myProduct.productLineItemType.size(); productLineItemNum++) {
+    for (auto &productLineItemNum : new_Product_Info) {
 
-        std::cout << productLineItemNum << ". " << std::flush;
-        std::cout << myProduct.productLineManufacturer[productLineItemNum] << ",";
-        std::cout << myProduct.productLineName[productLineItemNum] << ",";
-        std::cout << myProduct.productLineItemType[productLineItemNum] << "\n";
+        std::cout << productLineItemNum.productLineManufacturer << ",";
+        std::cout << productLineItemNum.productLineName << ",";
+        std::cout << productLineItemNum.productLineItemType << "\n";
 
     }
 
     std::cout << std::endl;
 }
 
-void newAvailableDetailedProductsToFile(const ProductInfo &myProduct) {
-    for (int productLineItemNum = 0; productLineItemNum < myProduct.productLineItemType.size(); productLineItemNum++) {
+void newAvailableDetailedProductsToFile(const ProductInfo &myProduct, std::vector<ProductInfo> &new_Product_Info) {
+    for (auto &productLineItemNum : new_Product_Info) {
         std::ofstream catalog_file("ProductLine.csv", std::ios::app);
         if (catalog_file.is_open()) {
 
-            catalog_file << myProduct.productLineManufacturer[productLineItemNum] << ",";
-            catalog_file << myProduct.productLineName[productLineItemNum] << ",";
-            catalog_file << myProduct.productLineItemType[productLineItemNum] << "\n";
+            catalog_file << productLineItemNum.productLineManufacturer << ",";
+            catalog_file << productLineItemNum.productLineName << ",";
+            catalog_file << productLineItemNum.productLineItemType << "\n";
             catalog_file.close();
         } else {
             std::cout << "Unable to open file" << std::endl;
@@ -377,7 +377,6 @@ std::string encrypt_string(std::string str) {
 }
 
 void DisplayProductionStatistics(int &productNumber, ItemTypeSerial &productSerial) {
-
 
     std::cout << "Total Product Created: " << productNumber << std::endl;
     std::cout << "Total Audio Products: " << productSerial.audio_count << std::endl;
