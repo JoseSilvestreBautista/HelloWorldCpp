@@ -16,7 +16,6 @@ int main() {  // drives the entire program by calling other functions.
     int productNumber = 0;
     std::vector<ProductInfo> Catalog;
     std::vector<ProductInfo> new_Product_Info;
-
     productSerialInfoLoad(productNumber, productSerial);
     processing(myProduct, productNumber, productSerial, Catalog, new_Product_Info);
     return 0;
@@ -42,7 +41,6 @@ void processing(ProductInfo &myProduct, int &productNumber,
     bool repeat = true;
     while (repeat) {
         menu();
-        std::cout << std::endl;
         int ask;
         std::cin >> ask;
         switch (ask) {
@@ -155,8 +153,6 @@ void addToProductLine(ProductInfo &myProduct, std::vector<ProductInfo> &new_Prod
 
     // Add three new products to the product line
     processingNewProductInfo(myProduct, new_Product_Info);
-    processingNewProductInfo(myProduct, new_Product_Info);
-    processingNewProductInfo(myProduct, new_Product_Info);
 
     // Output the products in the product line
     newAvailableDetailedProducts(myProduct, new_Product_Info);
@@ -169,13 +165,14 @@ void processingNewProductInfo(ProductInfo &myProduct, std::vector<ProductInfo> &
 
     std::cout << "Adding a new product to the product line\n";
     std::cout << "Enter the Manufacturer\n";
+    std::cin.ignore();
     std::string manufacturer;
     getline(std::cin, manufacturer);
     // add manufacturer to the vector here
     myProduct.productLineManufacturer = manufacturer;
     std::cout << "Enter the Product Name\n";
     std::string prodName;
-    std::cin >> prodName;
+    getline(std::cin, prodName);
     // add prodName to the vector
     myProduct.productLineName = prodName;
 
