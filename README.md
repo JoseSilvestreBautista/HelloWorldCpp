@@ -2,4 +2,4 @@
 
 #For information on the program's functions read the prototypes header file.
 
-![] (HelloWorldCpp/ezgif.com-optimize.gif)
+![](ezgif.com-optimize.gif)
