@@ -57,3 +57,11 @@ cplusplus
 Thank you to those I forgot!
 
 ## Key Programming Concepts Utilized
+Data types
+Functions
+Procedural vs. Objec-Oriented
+Structures
+Vectors and arrays
+Reading and writting in files
+Recursion
+Abstraction 
