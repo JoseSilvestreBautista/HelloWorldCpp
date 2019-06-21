@@ -1,3 +1,12 @@
+//
+// Created by joses on 5/29/2019.
+//
+
+#ifndef HELLOWORLD_PROTOTYPES_H
+#define HELLOWORLD_PROTOTYPES_H
+
+#include <iostream>
+#include <iomanip>
 #include <cstdio>
 #include <fstream>
 #include <string>
