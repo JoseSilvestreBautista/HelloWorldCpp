@@ -7,6 +7,7 @@ This program produces products and creates serial numbers for the products. The 
 
 ## Documentation
 The program is documented using Doxygen.
+https://josesilvestrebautista.github.io/Product-Line-Tacker/html/main_8cpp.html
 
 ## Getting Started
 To run this program you will need an ide such CLion by Jetbrains.
