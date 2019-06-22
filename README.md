@@ -10,11 +10,11 @@ The program is documented using Doxygen.
 https://josesilvestrebautista.github.io/Product-Line-Tacker/html/main_8cpp.html
 
 ## Getting Started
-*To run this program, you will need an IDE such CLion by Jetbrains.
-*Once an you have your ide create a C++ file.
-*Make sure your computer has C++ compiler like Visual Studio
-*Next go to Settings->Build,Execution,&,Deployment->ToolChains and use MinGW as for the debugger.
-*Ready to run!
+* To run this program, you will need an IDE such CLion by Jetbrains.
+* Once an you have your ide create a C++ file.
+* Make sure your computer has C++ compiler like Visual Studio
+* Next go to Settings->Build,Execution,&,Deployment->ToolChains and use MinGW as for the debugger.
+* Ready to run!
 
 ## Built With
 *IDE: CLION by Jetbrains
