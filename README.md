@@ -1,5 +1,5 @@
 # Production Tracker
-This program produces products and creates serial numbers for the products. The program also accepts new products once a user enter info about the new product. Employee accounts can be created which involves username and password encryption. The program was an individual project but recieved help through resources. The program is created because it was school assignment. At the start of this project my I had no knwoldge of c++. I pland to make future updates to this program.
+This program produces products and creates serial numbers for the products. The program also accepts new products once a user enters info about the new product. Employee accounts can be created which involves creating a username and creating a password that is encrypted. The program was an individual project but received help through resources. The program is created because it was school assignment. At the start of this project my I had no knowledge of C++. I plan to make future updates to this program.  
 
 
 ## Demonstration
@@ -10,10 +10,10 @@ The program is documented using Doxygen.
 https://josesilvestrebautista.github.io/Product-Line-Tacker/html/main_8cpp.html
 
 ## Getting Started
-To run this program you will need an ide such CLion by Jetbrains.
-Once an you have your ide create a c++ file.
-Make sure your computer has c++ compiler like VisualStudio
-Next go to  Settings->Build,Execution,&,Deployment->ToolChains and use MinGW as for the debugger.
+To run this program, you will need an IDE such CLion by Jetbrains.
+Once an you have your ide create a C++ file.
+Make sure your computer has C++ compiler like Visual Studio
+Next go to Settings->Build,Execution,&,Deployment->ToolChains and use MinGW as for the debugger.
 Ready to run!
 
 ## Built With
@@ -50,19 +50,20 @@ Jose Silvestre-Bautista
 
 ## Acknowledgments
 Github.com
-Professor Vanselow,Scott
+Professor Vanselow
 TA Collen
 John from Cave of Programming 
-Stack Overflow
-cplusplus
+StackOverflow.com
+Cplusplus.com
 Thank you to those I forgot!
 
 ## Key Programming Concepts Utilized
 Data types
 Functions
-Procedural vs. Objec-Oriented
+Procedural vs. Object-Oriented
 Structures
 Vectors and arrays
-Reading and writting in files
+Reading and writing in files
 Recursion
-Abstraction 
+Abstraction
+
