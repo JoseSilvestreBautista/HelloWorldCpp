@@ -3,7 +3,7 @@ This program produces products and creates serial numbers for the products. The 
 
 
 ## Demonstration
-![](ezgif.com-optimize.gif)
+![](ezgif.com-video-to-gif (1).gif)
 
 ## Documentation
 The program is documented using Doxygen.
