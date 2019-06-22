@@ -10,16 +10,16 @@ The program is documented using Doxygen.
 https://josesilvestrebautista.github.io/Product-Line-Tacker/html/main_8cpp.html
 
 ## Getting Started
-To run this program, you will need an IDE such CLion by Jetbrains.
-Once an you have your ide create a C++ file.
-Make sure your computer has C++ compiler like Visual Studio
-Next go to Settings->Build,Execution,&,Deployment->ToolChains and use MinGW as for the debugger.
-Ready to run!
+*To run this program, you will need an IDE such CLion by Jetbrains.
+*Once an you have your ide create a C++ file.
+*Make sure your computer has C++ compiler like Visual Studio
+*Next go to Settings->Build,Execution,&,Deployment->ToolChains and use MinGW as for the debugger.
+*Ready to run!
 
 ## Built With
-IDE: CLION by Jetbrains
-Software used: MinGW and VisualStudio
-Resources: Cave of Programming, Professor Vanselow, and TA Collen
+*IDE: CLION by Jetbrains
+*Software used: MinGW and VisualStudio
+*Resources: Cave of Programming, Professor Vanselow, and TA Collen
 
 ## License
 
@@ -49,21 +49,21 @@ SOFTWARE.
 Jose Silvestre-Bautista
 
 ## Acknowledgments
-Github.com
-Professor Vanselow
-TA Collen
-John from Cave of Programming 
-StackOverflow.com
-Cplusplus.com
-Thank you to those I forgot!
+*Github.com
+*Professor Vanselow
+*TA Collen
+*John from Cave of Programming 
+*StackOverflow.com
+*Cplusplus.com
+*Thank you to those I forgot!
 
 ## Key Programming Concepts Utilized
-Data types
-Functions
-Procedural vs. Object-Oriented
-Structures
-Vectors and arrays
-Reading and writing in files
-Recursion
-Abstraction
+*Data types
+*Functions
+*Procedural vs. Object-Oriented
+*Structures
+*Vectors and arrays
+*Reading and writing in files
+*Recursion
+*Abstraction
 
