@@ -1,0 +1,249 @@
+\hypertarget{main_8cpp}{}\section{main.\+cpp File Reference}
+\label{main_8cpp}\index{main.cpp@{main.cpp}}
+{\ttfamily \#include \char`\"{}prototypes.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_aac2c224a0b27f4d2e7b6400ac2550b89}{Display\+\_\+\+Main\+\_\+\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em The main menu display with the options\+: produce items, add products, add employee account, stats, and exit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_abfc8a39e6d02d787ad58b87eeafc7859}{Process\+\_\+\+Main\+\_\+\+Menu\+\_\+\+Selection}} (\mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} \&my\+\_\+\+Product\+\_\+\+Info, int \&product\+\_\+\+Number\+\_\+\+Count, \mbox{\hyperlink{struct_item___type___serial}{Item\+\_\+\+Type\+\_\+\+Serial}} \&my\+\_\+\+Item\+\_\+\+Type\+\_\+\+Serial, std\+::vector$<$ \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} $>$ \&catalog, std\+::vector$<$ \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} $>$ \&new\+\_\+\+Product\+\_\+\+Info)
+\begin{DoxyCompactList}\small\item\em Process the user\textquotesingle{}s main menu selection and prevents improper selection. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8cpp_a74201f994d9eb99a4fb002558ca5ff10}{Produce\+\_\+\+Items}} (int \&product\+\_\+\+Number\+\_\+\+Count, \mbox{\hyperlink{struct_item___type___serial}{Item\+\_\+\+Type\+\_\+\+Serial}} \&my\+\_\+\+Item\+\_\+\+Type\+\_\+\+Serial, std\+::vector$<$ \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} $>$ \&catalog)
+\begin{DoxyCompactList}\small\item\em Produces serial numbers for products that exit in file and saves the serial numbers to another file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a1e53a6ec56b3c1db553182b8349c7b89}{Add\+\_\+\+To\+\_\+\+Product\+\_\+\+Line}} (\mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} \&my\+\_\+\+Product\+\_\+\+Info, std\+::vector$<$ \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} $>$ \&new\+\_\+\+Product\+\_\+\+Info)
+\begin{DoxyCompactList}\small\item\em Where new products are created and stored to a file for manufacturing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a2366173de1089d35b737428f0d716a98}{Assemble\+\_\+\+New\+\_\+\+Product\+\_\+\+Info}} (\mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} \&my\+\_\+\+Product\+\_\+\+Info, std\+::vector$<$ \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} $>$ \&new\+\_\+\+Product\+\_\+\+Info)
+\begin{DoxyCompactList}\small\item\em The user adds new products to the line by entering manufacturer, product name, and item type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_ad8989bde988778a412a0b0fbedcaf9a7}{Display\+\_\+\+New\+\_\+\+Added\+\_\+\+Products}} (const \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} \&my\+\_\+\+Product\+\_\+\+Info, std\+::vector$<$ \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} $>$ \&new\+\_\+\+Product\+\_\+\+Info)
+\begin{DoxyCompactList}\small\item\em Displays newly added products to the user. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_aff1412201ccac45d2bdf524b95d676c4}{Store\+\_\+\+New\+\_\+\+Products\+\_\+\+To\+\_\+\+File}} (const \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} \&my\+\_\+\+Product\+\_\+\+Info, std\+::vector$<$ \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} $>$ \&new\+\_\+\+Product\+\_\+\+Info)
+\begin{DoxyCompactList}\small\item\em Saves the newly added products to a file for later use. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a4bd7ff9eca1e367768c9660a1dd5c65b}{Loads\+\_\+\+Products\+\_\+\+From\+\_\+\+Product\+Line\+\_\+\+File}} (\mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} \&my\+\_\+\+Product\+\_\+\+Info, std\+::vector$<$ \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} $>$ \&catalog)
+\begin{DoxyCompactList}\small\item\em Loads the productline files to the catalog for production. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a81e8343e3af53d56a561cda3e74eb456}{Loads\+\_\+\+Product\+\_\+\+And\+\_\+\+Serial\+\_\+\+Numbers\+\_\+\+From\+\_\+\+Production\+Log}} (int \&product\+\_\+\+Number\+\_\+\+Count, \mbox{\hyperlink{struct_item___type___serial}{Item\+\_\+\+Type\+\_\+\+Serial}} \&my\+\_\+\+Item\+\_\+\+Type\+\_\+\+Serial)
+\begin{DoxyCompactList}\small\item\em Loads the saved product numbers and serial numbers into the program. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_ad6dd26a8fe6e323c1141bd0a4c5db3ca}{Add\+\_\+\+Employee\+\_\+\+Account}} ()
+\begin{DoxyCompactList}\small\item\em The user creates an employee user name with first name and last name. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a52f494dd03210c3438944d15f7c8e21d}{Create\+\_\+\+Employee\+\_\+\+Password}} ()
+\begin{DoxyCompactList}\small\item\em The user creates a password with certain requirements such as lowercase and uppercase letters and an integer. The password is then stored in the Users file. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{main_8cpp_a90b5a833aa428474986d3d7d5fd78f27}{Encrypt\+\_\+\+Password}} (std\+::string password\+\_\+\+Being\+\_\+\+Encrypted)
+\begin{DoxyCompactList}\small\item\em Retrieves the created, valid password and then encrypts. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a9e973103c8c43e1ad753a6ec9b54317f}{Display\+\_\+\+Production\+\_\+\+Statistics}} (int \&product\+\_\+\+Number\+\_\+\+Count, \mbox{\hyperlink{struct_item___type___serial}{Item\+\_\+\+Type\+\_\+\+Serial}} \&my\+\_\+\+Item\+\_\+\+Type\+\_\+\+Serial)
+\begin{DoxyCompactList}\small\item\em Displays the total amount products by item type and the total products created by product Number. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_ad6dd26a8fe6e323c1141bd0a4c5db3ca}\label{main_8cpp_ad6dd26a8fe6e323c1141bd0a4c5db3ca}} 
+\index{main.cpp@{main.cpp}!Add\_Employee\_Account@{Add\_Employee\_Account}}
+\index{Add\_Employee\_Account@{Add\_Employee\_Account}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{Add\_Employee\_Account()}{Add\_Employee\_Account()}}
+{\footnotesize\ttfamily void Add\+\_\+\+Employee\+\_\+\+Account (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The user creates an employee user name with first name and last name. 
+
+\mbox{\Hypertarget{main_8cpp_a1e53a6ec56b3c1db553182b8349c7b89}\label{main_8cpp_a1e53a6ec56b3c1db553182b8349c7b89}} 
+\index{main.cpp@{main.cpp}!Add\_To\_Product\_Line@{Add\_To\_Product\_Line}}
+\index{Add\_To\_Product\_Line@{Add\_To\_Product\_Line}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{Add\_To\_Product\_Line()}{Add\_To\_Product\_Line()}}
+{\footnotesize\ttfamily void Add\+\_\+\+To\+\_\+\+Product\+\_\+\+Line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} \&}]{my\+\_\+\+Product\+\_\+\+Info,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} $>$ \&}]{new\+\_\+\+Product\+\_\+\+Info }\end{DoxyParamCaption})}
+
+
+
+Where new products are created and stored to a file for manufacturing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em my\+\_\+\+Product\+\_\+\+Info} & Stores the pieces of info about the new product. \\
+\hline
+{\em new\+\_\+\+Product\+\_\+\+Info} & Holds all the info about new products and only the new products. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a2366173de1089d35b737428f0d716a98}\label{main_8cpp_a2366173de1089d35b737428f0d716a98}} 
+\index{main.cpp@{main.cpp}!Assemble\_New\_Product\_Info@{Assemble\_New\_Product\_Info}}
+\index{Assemble\_New\_Product\_Info@{Assemble\_New\_Product\_Info}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{Assemble\_New\_Product\_Info()}{Assemble\_New\_Product\_Info()}}
+{\footnotesize\ttfamily void Assemble\+\_\+\+New\+\_\+\+Product\+\_\+\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} \&}]{my\+\_\+\+Product\+\_\+\+Info,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} $>$ \&}]{new\+\_\+\+Product\+\_\+\+Info }\end{DoxyParamCaption})}
+
+
+
+The user adds new products to the line by entering manufacturer, product name, and item type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em my\+\_\+\+Product\+\_\+\+Info} & Stores the pieces of info about the new product. \\
+\hline
+{\em new\+\_\+\+Product\+\_\+\+Info} & Holds all the info about new products and only the new products. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a52f494dd03210c3438944d15f7c8e21d}\label{main_8cpp_a52f494dd03210c3438944d15f7c8e21d}} 
+\index{main.cpp@{main.cpp}!Create\_Employee\_Password@{Create\_Employee\_Password}}
+\index{Create\_Employee\_Password@{Create\_Employee\_Password}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{Create\_Employee\_Password()}{Create\_Employee\_Password()}}
+{\footnotesize\ttfamily void Create\+\_\+\+Employee\+\_\+\+Password (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The user creates a password with certain requirements such as lowercase and uppercase letters and an integer. The password is then stored in the Users file. 
+
+\mbox{\Hypertarget{main_8cpp_aac2c224a0b27f4d2e7b6400ac2550b89}\label{main_8cpp_aac2c224a0b27f4d2e7b6400ac2550b89}} 
+\index{main.cpp@{main.cpp}!Display\_Main\_Menu@{Display\_Main\_Menu}}
+\index{Display\_Main\_Menu@{Display\_Main\_Menu}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{Display\_Main\_Menu()}{Display\_Main\_Menu()}}
+{\footnotesize\ttfamily void Display\+\_\+\+Main\+\_\+\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The main menu display with the options\+: produce items, add products, add employee account, stats, and exit. 
+
+\mbox{\Hypertarget{main_8cpp_ad8989bde988778a412a0b0fbedcaf9a7}\label{main_8cpp_ad8989bde988778a412a0b0fbedcaf9a7}} 
+\index{main.cpp@{main.cpp}!Display\_New\_Added\_Products@{Display\_New\_Added\_Products}}
+\index{Display\_New\_Added\_Products@{Display\_New\_Added\_Products}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{Display\_New\_Added\_Products()}{Display\_New\_Added\_Products()}}
+{\footnotesize\ttfamily void Display\+\_\+\+New\+\_\+\+Added\+\_\+\+Products (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} \&}]{my\+\_\+\+Product\+\_\+\+Info,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} $>$ \&}]{new\+\_\+\+Product\+\_\+\+Info }\end{DoxyParamCaption})}
+
+
+
+Displays newly added products to the user. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em my\+\_\+\+Product\+\_\+\+Info} & Stores the pieces of info about the new product. \\
+\hline
+{\em new\+\_\+\+Product\+\_\+\+Info} & Holds all the info about new products and only the new products. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a9e973103c8c43e1ad753a6ec9b54317f}\label{main_8cpp_a9e973103c8c43e1ad753a6ec9b54317f}} 
+\index{main.cpp@{main.cpp}!Display\_Production\_Statistics@{Display\_Production\_Statistics}}
+\index{Display\_Production\_Statistics@{Display\_Production\_Statistics}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{Display\_Production\_Statistics()}{Display\_Production\_Statistics()}}
+{\footnotesize\ttfamily void Display\+\_\+\+Production\+\_\+\+Statistics (\begin{DoxyParamCaption}\item[{int \&}]{product\+\_\+\+Number\+\_\+\+Count,  }\item[{\mbox{\hyperlink{struct_item___type___serial}{Item\+\_\+\+Type\+\_\+\+Serial}} \&}]{my\+\_\+\+Item\+\_\+\+Type\+\_\+\+Serial }\end{DoxyParamCaption})}
+
+
+
+Displays the total amount products by item type and the total products created by product Number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em product\+\_\+\+Number\+\_\+\+Count} & Holds the most recent product number recorded. \\
+\hline
+{\em my\+\_\+\+Item\+\_\+\+Type\+\_\+\+Serial} & holds the most recent serial number by item type. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a90b5a833aa428474986d3d7d5fd78f27}\label{main_8cpp_a90b5a833aa428474986d3d7d5fd78f27}} 
+\index{main.cpp@{main.cpp}!Encrypt\_Password@{Encrypt\_Password}}
+\index{Encrypt\_Password@{Encrypt\_Password}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{Encrypt\_Password()}{Encrypt\_Password()}}
+{\footnotesize\ttfamily std\+::string Encrypt\+\_\+\+Password (\begin{DoxyParamCaption}\item[{std\+::string}]{password\+\_\+\+Being\+\_\+\+Encrypted }\end{DoxyParamCaption})}
+
+
+
+Retrieves the created, valid password and then encrypts. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em product\+Line\+Manufacturer} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a81e8343e3af53d56a561cda3e74eb456}\label{main_8cpp_a81e8343e3af53d56a561cda3e74eb456}} 
+\index{main.cpp@{main.cpp}!Loads\_Product\_And\_Serial\_Numbers\_From\_ProductionLog@{Loads\_Product\_And\_Serial\_Numbers\_From\_ProductionLog}}
+\index{Loads\_Product\_And\_Serial\_Numbers\_From\_ProductionLog@{Loads\_Product\_And\_Serial\_Numbers\_From\_ProductionLog}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{Loads\_Product\_And\_Serial\_Numbers\_From\_ProductionLog()}{Loads\_Product\_And\_Serial\_Numbers\_From\_ProductionLog()}}
+{\footnotesize\ttfamily void Loads\+\_\+\+Product\+\_\+\+And\+\_\+\+Serial\+\_\+\+Numbers\+\_\+\+From\+\_\+\+Production\+Log (\begin{DoxyParamCaption}\item[{int \&}]{product\+\_\+\+Number\+\_\+\+Count,  }\item[{\mbox{\hyperlink{struct_item___type___serial}{Item\+\_\+\+Type\+\_\+\+Serial}} \&}]{my\+\_\+\+Item\+\_\+\+Type\+\_\+\+Serial }\end{DoxyParamCaption})}
+
+
+
+Loads the saved product numbers and serial numbers into the program. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em my\+\_\+\+Item\+\_\+\+Type\+\_\+\+Serial} & holds the most recent serial number by item type. \\
+\hline
+{\em product\+\_\+\+Number\+\_\+\+Count} & Holds the most recent product number recorded. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a4bd7ff9eca1e367768c9660a1dd5c65b}\label{main_8cpp_a4bd7ff9eca1e367768c9660a1dd5c65b}} 
+\index{main.cpp@{main.cpp}!Loads\_Products\_From\_ProductLine\_File@{Loads\_Products\_From\_ProductLine\_File}}
+\index{Loads\_Products\_From\_ProductLine\_File@{Loads\_Products\_From\_ProductLine\_File}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{Loads\_Products\_From\_ProductLine\_File()}{Loads\_Products\_From\_ProductLine\_File()}}
+{\footnotesize\ttfamily void Loads\+\_\+\+Products\+\_\+\+From\+\_\+\+Product\+Line\+\_\+\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} \&}]{my\+\_\+\+Product\+\_\+\+Info,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} $>$ \&}]{catalog }\end{DoxyParamCaption})}
+
+
+
+Loads the productline files to the catalog for production. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em catalog} & Holds all product info from the productline file to be printed and manipulated. \\
+\hline
+{\em my\+\_\+\+Product\+\_\+\+Info} & Stores the pieces of info about the new product. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_abfc8a39e6d02d787ad58b87eeafc7859}\label{main_8cpp_abfc8a39e6d02d787ad58b87eeafc7859}} 
+\index{main.cpp@{main.cpp}!Process\_Main\_Menu\_Selection@{Process\_Main\_Menu\_Selection}}
+\index{Process\_Main\_Menu\_Selection@{Process\_Main\_Menu\_Selection}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{Process\_Main\_Menu\_Selection()}{Process\_Main\_Menu\_Selection()}}
+{\footnotesize\ttfamily void Process\+\_\+\+Main\+\_\+\+Menu\+\_\+\+Selection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} \&}]{my\+\_\+\+Product\+\_\+\+Info,  }\item[{int \&}]{product\+\_\+\+Number\+\_\+\+Count,  }\item[{\mbox{\hyperlink{struct_item___type___serial}{Item\+\_\+\+Type\+\_\+\+Serial}} \&}]{my\+\_\+\+Item\+\_\+\+Type\+\_\+\+Serial,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} $>$ \&}]{catalog,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} $>$ \&}]{new\+\_\+\+Product\+\_\+\+Info }\end{DoxyParamCaption})}
+
+
+
+Process the user\textquotesingle{}s main menu selection and prevents improper selection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em my\+\_\+\+Product\+\_\+\+Info} & handles three single pieces of info for individual products. \\
+\hline
+{\em product\+\_\+\+Number\+\_\+\+Count} & holds the most recent product number recorded. \\
+\hline
+{\em my\+\_\+\+Item\+\_\+\+Type\+\_\+\+Serial} & holds the most recent serial number by item type. \\
+\hline
+{\em catalog} & holds all product info together to be printed. \\
+\hline
+{\em new\+\_\+\+Product\+\_\+\+Info} & holds new added products and displays them only. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a74201f994d9eb99a4fb002558ca5ff10}\label{main_8cpp_a74201f994d9eb99a4fb002558ca5ff10}} 
+\index{main.cpp@{main.cpp}!Produce\_Items@{Produce\_Items}}
+\index{Produce\_Items@{Produce\_Items}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{Produce\_Items()}{Produce\_Items()}}
+{\footnotesize\ttfamily int Produce\+\_\+\+Items (\begin{DoxyParamCaption}\item[{int \&}]{product\+\_\+\+Number\+\_\+\+Count,  }\item[{\mbox{\hyperlink{struct_item___type___serial}{Item\+\_\+\+Type\+\_\+\+Serial}} \&}]{my\+\_\+\+Item\+\_\+\+Type\+\_\+\+Serial,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} $>$ \&}]{catalog }\end{DoxyParamCaption})}
+
+
+
+Produces serial numbers for products that exit in file and saves the serial numbers to another file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em product\+\_\+\+Number\+\_\+\+Count} & Holds the most recent product number recorded. \\
+\hline
+{\em product\+\_\+\+Number\+\_\+\+Count} & Holds the most recent product number recorded. \\
+\hline
+{\em catalog} & Holds all product info together to be printed. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_aff1412201ccac45d2bdf524b95d676c4}\label{main_8cpp_aff1412201ccac45d2bdf524b95d676c4}} 
+\index{main.cpp@{main.cpp}!Store\_New\_Products\_To\_File@{Store\_New\_Products\_To\_File}}
+\index{Store\_New\_Products\_To\_File@{Store\_New\_Products\_To\_File}!main.cpp@{main.cpp}}
+\subsubsection{\texorpdfstring{Store\_New\_Products\_To\_File()}{Store\_New\_Products\_To\_File()}}
+{\footnotesize\ttfamily void Store\+\_\+\+New\+\_\+\+Products\+\_\+\+To\+\_\+\+File (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} \&}]{my\+\_\+\+Product\+\_\+\+Info,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_product___info}{Product\+\_\+\+Info}} $>$ \&}]{new\+\_\+\+Product\+\_\+\+Info }\end{DoxyParamCaption})}
+
+
+
+Saves the newly added products to a file for later use. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em my\+\_\+\+Product\+\_\+\+Info} & Stores the pieces of info about the new product. \\
+\hline
+{\em new\+\_\+\+Product\+\_\+\+Info} & Holds all the info about new products and only the new products. \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['loads_5fproduct_5fand_5fserial_5fnumbers_5ffrom_5fproductionlog',['Loads_Product_And_Serial_Numbers_From_ProductionLog',['../main_8cpp.html#a81e8343e3af53d56a561cda3e74eb456',1,'Loads_Product_And_Serial_Numbers_From_ProductionLog(int &amp;product_Number_Count, Item_Type_Serial &amp;my_Item_Type_Serial):&#160;main.cpp'],['../prototypes_8h.html#a81e8343e3af53d56a561cda3e74eb456',1,'Loads_Product_And_Serial_Numbers_From_ProductionLog(int &amp;product_Number_Count, Item_Type_Serial &amp;my_Item_Type_Serial):&#160;main.cpp']]],
+  ['loads_5fproducts_5ffrom_5fproductline_5ffile',['Loads_Products_From_ProductLine_File',['../main_8cpp.html#a4bd7ff9eca1e367768c9660a1dd5c65b',1,'Loads_Products_From_ProductLine_File(Product_Info &amp;my_Product_Info, std::vector&lt; Product_Info &gt; &amp;catalog):&#160;main.cpp'],['../prototypes_8h.html#a4bd7ff9eca1e367768c9660a1dd5c65b',1,'Loads_Products_From_ProductLine_File(Product_Info &amp;my_Product_Info, std::vector&lt; Product_Info &gt; &amp;catalog):&#160;main.cpp']]]
+];
